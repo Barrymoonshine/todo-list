@@ -7,7 +7,31 @@
     <title>To do list</title>
   </head>
   <body>
-    <div id="main"></div>
+    <div class="header">To Do List</div>
+    <div class="sidebar">
+      <ul class="sidebar-home">
+        Home
+        <li>All tasks</li>
+        <li>Today</li>
+        <li>Next 7 Days</li>
+        <li>Important</li>
+      </ul>
+      <ul class="side-bar-projects">
+        Projects
+        <div class="sidebar-project-container"></div>
+        <button id="add-project">Add Project</button>
+      </ul>
+    </div>
+    <main>
+      <div class="dynamic-content-container"></div>
+    </main>
+    <div class="footer">
+      <p>
+        © Made by
+        <a href="https://github.com/Barrymoonshine">Barry Moonshine</a> for
+        <a href="https://www.theodinproject.com/">The Odin Project</a>
+      </p>
+    </div>
     <script src="main.js"></script>
   </body>
 </html>
