@@ -19,6 +19,9 @@
   },
   "homepage": "https://github.com/Barrymoonshine/todo-list#readme",
   "devDependencies": {
+    "eslint": "^8.36.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
     "webpack": "^5.76.1",
     "webpack-cli": "^5.0.1"
   }
