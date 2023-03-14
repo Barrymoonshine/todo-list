@@ -1,17 +1,21 @@
+* {
+  margin: 0px;
+}
+
 body {
   color: red;
 }
 
 .page-container {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-columns: 1fr 4fr;
   grid-template-rows: 1fr 4fr;
 }
 
 .header {
-  grid-column: 1 / 4;
+  grid-column: 1 / 3;
   grid-row: 1 / 2;
   border: 1px solid black;
 }
@@ -23,13 +27,15 @@ body {
 }
 
 .dynamic-content-container {
-  grid-column: 2 / 3;
+  width: 100%;
+  height: 100%;
+  grid-column: 2/ 3;
   grid-row: 2 / 3;
   border: 1px solid blue;
 }
 
 .footer {
-  grid-column: 1 / 4;
+  grid-column: 1 / 3;
   grid-row: 3 / 4;
   border: 1px solid purple;
 }
