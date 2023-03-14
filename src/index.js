@@ -4,7 +4,7 @@ import listIcon from './assets/images/list.png';
 
 testScript();
 
-const header = document.getElementById('title');
+const header = document.getElementById('page-header');
 
 header.innerHTML = `
-<img class="list-icon" src="../src/assets/images/list.png" alt="List icon">`;
+<img class="list-icon" src="../src/assets/images/list.png" alt="List icon"> To Do List`;
