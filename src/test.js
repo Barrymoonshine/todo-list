@@ -1,5 +1,5 @@
 export default function testScript() {
-  const mainContent = document.getElementById("main");
+  const sideBar = document.getElementsByClassName("sidebar");
 
-  mainContent.textContent = "Hello world!";
+  sideBar.textContent = "Hello world!";
 }
