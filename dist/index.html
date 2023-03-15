@@ -81,12 +81,25 @@
                       required
                     />
                   </li>
-                  <label for="Priority">Priority:</label>
-                    <select name="priority" id="priority">
-                      <option value="High">High</option>
-                      <option value="Medium">Medium</option>
-                      <option value="Low">Low</option>
-                    </select>
+                  <li>
+                    <label for="Priority">Priority:</label>
+                      <select name="priority" id="priority">
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                     </select>
+                  </li>
+                  <li>
+                    <label for="Due date">Due date:</label>
+                  <input 
+                  type="date" 
+                  id="due-date" 
+                  name="due-date"
+                  value="2023-03-15"
+                  min="2023-03-15"
+                  required 
+                  >
+                  </li>
                   <li class="button">
                     <label for="Submit new project"></label>
                     <button id="submit-project-button" type="submit">Submit</button>
