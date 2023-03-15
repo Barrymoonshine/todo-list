@@ -20,7 +20,29 @@
         <ul class="side-bar-projects">
           Projects
           <div class="sidebar-project-container"></div>
-          <button id="add-project">Add Project</button>
+          <button id="add-project">+ Project</button>
+          <!--Add new project modal-->
+          <div id="new-project-modal" class="project-modal">
+            <div class="project-modal-content">
+              <form id="new-project-form">
+                <ul>
+                  <li>
+                    <label for="player one's name">New Project</label>
+                    <input
+                      type="text"
+                      id="project-name"
+                      name="project-name"
+                      minlength="1"
+                      required
+                    />
+                  </li>
+                  <li class="button">
+                    <label for="Submit new project"></label>
+                    <button id="submit-button" type="submit">Submit</button>
+                  </li>
+                </ul>
+              </form>
+            <!--Modal end-->
         </ul>
       </div>
       <main>
