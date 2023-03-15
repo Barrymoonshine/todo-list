@@ -1,16 +1,13 @@
 import './global-style.css';
 import listIcon from './assets/images/list.png';
-import {
-  renderDefaultPage,
-  displayProjectModal,
-} from './modules/displayController.js';
+import displayController from './modules/displayController.js';
 
-renderDefaultPage();
+displayController.renderDefaultPage();
 
 const newProjectButton = document.getElementById('add-project');
 
 newProjectButton.addEventListener('click', () => {
-  displayProjectModal();
+  displayController.displayProjectModal();
   console.log('new project button pressed');
 });
 
