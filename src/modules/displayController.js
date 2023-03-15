@@ -1,11 +1,13 @@
 const displayController = (() => {
   const pageContainer = document.getElementById('main-page-container');
-  const dynamicContainer = document.getElementById('dynamic-container');
   const projectModal = document.getElementById('new-project-modal');
   const closeProjectFormBtn = document.getElementById('close-project-form');
   const newProjectButton = document.getElementById('add-project');
   const dynamicProjectContainer = document.getElementById(
     'dynamic-project-container'
+  );
+  const dynamicListContainer = document.getElementById(
+    'dynamic-list-container'
   );
   let counter = 0;
 
@@ -25,7 +27,7 @@ const displayController = (() => {
   const addNewProject = () => {
     incrementByOne();
     dynamicProjectContainer.innerHTML += String.raw`
-    <button id="project-button-${counter}">
+    <button id='project-button-${counter}'>
     ${getProjectName()} 
     </button>
   `;
@@ -36,21 +38,32 @@ const displayController = (() => {
     projectName.value = '';
   };
 
+  const displayProject = (targetProjectName) => {
+    dynamicListContainer.innerHTML = String.raw`
+    <div class='list-title'>${targetProjectName}</div>
+    <button id='add-task-button'>+ Task</button>
+    `;
+  };
+
   newProjectButton.addEventListener('click', () => {
     projectModal.style.display = 'flex';
     pageContainer.style.backgroundColor = 'rgba (0,0,0,0.4)';
 
     closeProjectFormBtn.addEventListener('click', () => {
       hideModals();
-      console.log('close project form btn pressed');
     });
 
     pageContainer.addEventListener('click', (e) => {
       if (e.target === projectModal) {
         hideModals();
-        console.log('page container close modal pressed');
       }
     });
+  });
+
+  dynamicProjectContainer.addEventListener('click', (e) => {
+    const targetProjectName = e.target.textContent;
+    console.log(targetProjectName);
+    displayProject(targetProjectName);
   });
 
   return {
