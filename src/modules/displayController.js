@@ -1,4 +1,5 @@
 import formValueProvider from './formValueProvider.js';
+import tasksHolder from './tasksHolder.js';
 
 const displayController = (() => {
   const pageContainer = document.getElementById('main-page-container');
@@ -27,7 +28,7 @@ const displayController = (() => {
     taskModal.style.display = 'none';
   };
 
-  const addNewProject = () => {
+  const displayNewProject = () => {
     incrementByOne();
     dynamicProjectContainer.innerHTML += String.raw`
     <button id='project-button-${counter}'>
@@ -56,6 +57,25 @@ const displayController = (() => {
     `;
   };
 
+  const displayTasks = () => {
+    // Remove previous tasks
+    while (dynamicListContainer.firstChild) {
+      dynamicListContainer.removeChild(dynamicListContainer.firstChild);
+    }
+    // Add tasks, including new task
+    tasksHolder.myTasks.forEach((item, index) => {
+      dynamicListContainer.innerHTML = +String.raw`
+        <div class='my-tasks' id='${index}'>
+        <div>
+          <p>Title: ${item.title}</p> 
+          <p>Description: ${item.description}</p> 
+          <p>Priority: ${item.priority}</p> 
+          <p>Due date: ${item.dueDate}</p> 
+        </div>
+      `;
+    });
+  };
+
   newProjectButton.addEventListener('click', () => {
     projectModal.style.display = 'flex';
     pageContainer.style.backgroundColor = 'rgba (0,0,0,0.4)';
@@ -81,8 +101,9 @@ const displayController = (() => {
 
   return {
     hideModals,
-    addNewProject,
+    displayNewProject,
     clearForms,
+    displayTasks,
   };
 })();
 
