@@ -1,8 +1,8 @@
-import testScript from './test.js';
 import './global-style.css';
 import listIcon from './assets/images/list.png';
+import renderDefaultPage from './modules/displayController.js';
 
-testScript();
+renderDefaultPage();
 
 const header = document.getElementById('page-header');
 
