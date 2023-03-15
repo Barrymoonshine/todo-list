@@ -3,18 +3,13 @@ const displayController = (() => {
   const dynamicContainer = document.getElementById('dynamic-container');
   const projectModal = document.getElementById('new-project-modal');
   const closeProjectFormBtn = document.getElementById('close-project-form');
-
-  const renderDefaultPage = () => {
-    // To be updated or removed
-    dynamicContainer.innerHTML = `
-      Test test one two`;
-  };
+  const newProjectButton = document.getElementById('add-project');
 
   const hideModal = () => {
     projectModal.style.display = 'none';
   };
 
-  const displayProjectModal = () => {
+  newProjectButton.addEventListener('click', () => {
     projectModal.style.display = 'flex';
     pageContainer.style.backgroundColor = 'rgba (0,0,0,0.4)';
 
@@ -29,11 +24,16 @@ const displayController = (() => {
         console.log('page container close modal pressed');
       }
     });
+  });
+
+  const renderDefaultPage = () => {
+    // To be updated or removed
+    dynamicContainer.innerHTML = `
+      Test test one two`;
   };
 
   return {
     renderDefaultPage,
-    displayProjectModal,
   };
 })();
 
