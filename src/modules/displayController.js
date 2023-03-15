@@ -7,10 +7,15 @@ const displayController = (() => {
   const dynamicProjectContainer = document.getElementById(
     'dynamic-project-container'
   );
+  let counter = 0;
 
   const getProjectName = () => {
     const projectName = document.getElementById('project-name').value;
     return projectName;
+  };
+
+  const incrementByOne = () => {
+    counter += 1;
   };
 
   const hideModals = () => {
@@ -18,8 +23,11 @@ const displayController = (() => {
   };
 
   const addNewProject = () => {
+    incrementByOne();
     dynamicProjectContainer.innerHTML += String.raw`
-    <button>${getProjectName()} </button>
+    <button id="project-button-${counter}">
+    ${getProjectName()} 
+    </button>
   `;
   };
 
@@ -45,14 +53,7 @@ const displayController = (() => {
     });
   });
 
-  const renderDefaultPage = () => {
-    // To be updated or removed
-    dynamicContainer.innerHTML = `
-      Test test one two`;
-  };
-
   return {
-    renderDefaultPage,
     hideModals,
     addNewProject,
     clearForms,
