@@ -1,3 +1,5 @@
+import formValueProvider from './formValueProvider.js';
+
 const displayController = (() => {
   const pageContainer = document.getElementById('main-page-container');
   const projectModal = document.getElementById('new-project-modal');
@@ -16,11 +18,6 @@ const displayController = (() => {
   );
   let counter = 0;
 
-  const getProjectName = () => {
-    const projectName = document.getElementById('project-name').value;
-    return projectName;
-  };
-
   const incrementByOne = () => {
     counter += 1;
   };
@@ -34,7 +31,7 @@ const displayController = (() => {
     incrementByOne();
     dynamicProjectContainer.innerHTML += String.raw`
     <button id='project-button-${counter}'>
-    ${getProjectName()} 
+    ${formValueProvider.getProjectName()} 
     </button>
   `;
   };
@@ -62,11 +59,9 @@ const displayController = (() => {
   newProjectButton.addEventListener('click', () => {
     projectModal.style.display = 'flex';
     pageContainer.style.backgroundColor = 'rgba (0,0,0,0.4)';
-
     closeProjectFormBtn.addEventListener('click', () => {
       hideModals();
     });
-
     clickWindowCloseModal();
   });
 
@@ -78,11 +73,9 @@ const displayController = (() => {
   newTaskButton.addEventListener('click', () => {
     taskModal.style.display = 'flex';
     pageContainer.style.backgroundColor = 'rgba (0,0,0,0.4)';
-
     closeTaskFormBtn.addEventListener('click', () => {
       hideModals();
     });
-
     clickWindowCloseModal();
   });
 
