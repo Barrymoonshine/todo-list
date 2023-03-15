@@ -3,16 +3,14 @@ import displayController from './displayController.js';
 const appController = (() => {
   const submitNewProjectBtn = document.getElementById('submit-project-button');
 
-  const handleNewProjectForm = (e) => {
+  submitNewProjectBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    const projectName = document.getElementById('project-name');
-    displayController.addNewProject(projectName);
-    displayController.hideModal();
-  };
+    displayController.addNewProject();
+    displayController.hideModals();
+    displayController.clearForms();
+  });
 
-  return {
-    handleNewProjectForm,
-  };
+  return {};
 })();
 
 export default appController;

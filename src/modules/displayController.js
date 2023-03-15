@@ -4,9 +4,28 @@ const displayController = (() => {
   const projectModal = document.getElementById('new-project-modal');
   const closeProjectFormBtn = document.getElementById('close-project-form');
   const newProjectButton = document.getElementById('add-project');
+  const dynamicProjectContainer = document.getElementById(
+    'dynamic-project-container'
+  );
 
-  const hideModal = () => {
+  const getProjectName = () => {
+    const projectName = document.getElementById('project-name').value;
+    return projectName;
+  };
+
+  const hideModals = () => {
     projectModal.style.display = 'none';
+  };
+
+  const addNewProject = () => {
+    dynamicProjectContainer.innerHTML += String.raw`
+    <button>${getProjectName()} </button>
+  `;
+  };
+
+  const clearForms = () => {
+    const projectName = document.getElementById('project-name');
+    projectName.value = '';
   };
 
   newProjectButton.addEventListener('click', () => {
@@ -14,13 +33,13 @@ const displayController = (() => {
     pageContainer.style.backgroundColor = 'rgba (0,0,0,0.4)';
 
     closeProjectFormBtn.addEventListener('click', () => {
-      hideModal();
+      hideModals();
       console.log('close project form btn pressed');
     });
 
     pageContainer.addEventListener('click', (e) => {
       if (e.target === projectModal) {
-        hideModal();
+        hideModals();
         console.log('page container close modal pressed');
       }
     });
@@ -34,6 +53,9 @@ const displayController = (() => {
 
   return {
     renderDefaultPage,
+    hideModals,
+    addNewProject,
+    clearForms,
   };
 })();
 
