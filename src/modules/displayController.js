@@ -65,8 +65,7 @@ const displayController = (() => {
     while (dynamicTasksContainer.firstChild) {
       dynamicTasksContainer.removeChild(dynamicTasksContainer.firstChild);
     }
-    // Add tasks, including new task
-
+    // Add back tasks, including new task
     tasksHolder.myTasks.forEach((item, index) => {
       dynamicTasksContainer.innerHTML += String.raw`
         <div class='my-tasks' id='${index}'>
