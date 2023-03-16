@@ -76,13 +76,13 @@ const displayController = (() => {
     // Add back tasks, including new task
     tasksHolder.myTasks.forEach((item, index) => {
       dynamicTasksContainer.innerHTML += String.raw`
-        <div class="my-tasks" id="${index}">
+        <div class="my-tasks" id="task-${index}">
         <div class="task-nav">
           <input type="checkbox">
           Title: ${item.title}
-          <button class="edit-button">Edit</button>
-          <button class="priority-button">Priority</button>
-          <button class="delete-button">Delete</button>
+          <button id="edit-${index}">Edit</button>
+          <button id="priority-${index}">Priority</button>
+          <button id="delete-${index}">Delete</button>
         </div>  
         <div class="task-content">
           <p>Title: ${item.title}</p> 
