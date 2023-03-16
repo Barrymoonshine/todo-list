@@ -80,15 +80,16 @@ const displayController = (() => {
     // Add back tasks, including new task
     tasksHolder.myTasks.forEach((item, index) => {
       dynamicTasksContainer.innerHTML += String.raw`
-        <div class="my-tasks" id="task-${index}">
-        <div class="task-nav">
+        <div class="my-tasks">
+        <div class="task-nav" id="task-nav-${index}">
           <input type="checkbox">
           Title: ${item.title}
           <button id="edit-${index}">Edit</button>
           <button id="priority-${index}">Priority</button>
           <button id="delete-${index}">Delete</button>
+          <button id="expand-${index}">Expand</button>
         </div>  
-        <div class="task-content">
+        <div class="task-content" id="task-content-${index}">
           <p>Title: ${item.title}</p> 
           <p>Description: ${item.description}</p> 
           <p>Priority: ${item.priority}</p> 
@@ -96,6 +97,18 @@ const displayController = (() => {
         </div>
       `;
     });
+  };
+
+  const toggleTaskDisplay = (index) => {
+    const targetContent = document.getElementById(`task-content-${index}`);
+    const targetButton = document.getElementById(`expand-${index}`);
+    if (targetButton.textContent === 'Expand') {
+      targetContent.style.display = 'flex';
+      targetButton.textContent = 'Minimise';
+    } else {
+      targetContent.style.display = 'none';
+      targetButton.textContent = 'Expand';
+    }
   };
 
   newProjectButton.addEventListener('click', () => {
@@ -127,6 +140,7 @@ const displayController = (() => {
     displayNewProject,
     clearForms,
     displayTasks,
+    toggleTaskDisplay,
   };
 })();
 

@@ -71,6 +71,10 @@ button {
   flex-direction: column;
 }
 
+#dynamic-tasks-container {
+  padding: 20px;
+}
+
 #project-title {
   font-size: 40px;
   font-style: bold;
@@ -88,6 +92,7 @@ button {
 }
 
 .task-content {
+  display: none;
   border: 1px solid black;
 }
 

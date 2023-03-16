@@ -48,11 +48,10 @@ const appController = (() => {
     displayController.clearForms();
   };
 
-  // Create function to handle removing nonnumbers
-  // const removeNonNumbers = (e) =. {
-  //   const indexPosition = e.target.id.replace(/\D/g, '');
-  //   return indexPosition
-  // }
+  const getIndex = (e) => {
+    const indexPosition = e.target.id.replace(/\D/g, '');
+    return indexPosition;
+  };
 
   const addTaskToForm = (indexPosition) => {
     const titleValue = document.getElementById('task-title');
@@ -66,18 +65,19 @@ const appController = (() => {
   };
 
   const deleteTask = (e) => {
-    const indexPosition = e.target.id.replace('delete-', '');
-    tasksHolder.myTasks.splice(indexPosition, 1);
+    tasksHolder.myTasks.splice(getIndex(e), 1);
     displayController.displayTasks();
   };
 
   const editTask = (e) => {
-    const indexPosition = e.target.id.replace('edit-', '');
-    addTaskToForm(indexPosition);
+    addTaskToForm(getIndex(e));
     displayController.displayTaskModal();
-    // Event listener for form being submitted?
     editMode = true;
-    index = indexPosition;
+    index = getIndex(e);
+  };
+
+  const toggleTaskDetails = (e) => {
+    displayController.toggleTaskDisplay(getIndex(e));
   };
 
   submitNewProjectForm.addEventListener('submit', (e) => {
@@ -94,6 +94,8 @@ const appController = (() => {
       deleteTask(e);
     } else if (targetElement.includes('edit')) {
       editTask(e);
+    } else if (targetElement.includes('expand')) {
+      toggleTaskDetails(e);
     }
   });
 
