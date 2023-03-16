@@ -80,9 +80,8 @@ const appController = (() => {
     displayController.toggleTaskDisplay(getIndexPosition(e));
   };
 
-  const changePriority = (e) => {
+  const togglePriority = (e) => {
     const targetTask = tasksHolder.myTasks[getIndexPosition(e)];
-    console.log(targetTask);
     if (targetTask.priority === 'Low') {
       targetTask.priority = 'Medium';
     } else if (targetTask.priority === 'Medium') {
@@ -92,6 +91,12 @@ const appController = (() => {
     }
     // displayController.stylePriorityButton();
     displayController.displayTasks();
+  };
+
+  const completeTask = (e) => {
+    setTimeout(() => {
+      deleteTask(e);
+    }, 100);
   };
 
   submitNewProjectForm.addEventListener('submit', (e) => {
@@ -111,7 +116,9 @@ const appController = (() => {
     } else if (targetElement.includes('expand')) {
       toggleTaskDetails(e);
     } else if (targetElement.includes('priority')) {
-      changePriority(e);
+      togglePriority(e);
+    } else if (targetElement.includes('task-complete')) {
+      completeTask(e);
     }
   });
 
