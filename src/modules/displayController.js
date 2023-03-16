@@ -72,6 +72,8 @@ const displayController = (() => {
     `;
   };
 
+  const stylePriorityButton = () => {};
+
   const displayTasks = () => {
     // Remove previous tasks
     while (dynamicTasksContainer.firstChild) {
@@ -85,7 +87,7 @@ const displayController = (() => {
           <input type="checkbox">
           Title: ${item.title}
           <button id="edit-${index}">Edit</button>
-          <button id="priority-${index}">Priority</button>
+          <button id="priority-${index}">${item.priority}</button>
           <button id="delete-${index}">Delete</button>
           <button id="expand-${index}">Expand</button>
         </div>  
@@ -97,6 +99,7 @@ const displayController = (() => {
         </div>
       `;
     });
+    stylePriorityButton();
   };
 
   const toggleTaskDisplay = (index) => {
@@ -139,6 +142,7 @@ const displayController = (() => {
     displayTaskModal,
     displayNewProject,
     clearForms,
+    stylePriorityButton,
     displayTasks,
     toggleTaskDisplay,
   };
