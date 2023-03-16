@@ -17,6 +17,9 @@ const displayController = (() => {
   const dynamicListContainer = document.getElementById(
     'dynamic-list-container'
   );
+  const dynamicTasksContainer = document.getElementById(
+    'dynamic-tasks-container'
+  );
   let counter = 0;
 
   const incrementByOne = () => {
@@ -59,13 +62,13 @@ const displayController = (() => {
 
   const displayTasks = () => {
     // Remove previous tasks
-    while (dynamicListContainer.firstChild) {
-      dynamicListContainer.removeChild(dynamicListContainer.firstChild);
+    while (dynamicTasksContainer.firstChild) {
+      dynamicTasksContainer.removeChild(dynamicTasksContainer.firstChild);
     }
     // Add tasks, including new task
 
     tasksHolder.myTasks.forEach((item, index) => {
-      dynamicListContainer.innerHTML += String.raw`
+      dynamicTasksContainer.innerHTML += String.raw`
         <div class='my-tasks' id='${index}'>
         <div>
           <p>Title: ${item.title}</p> 
