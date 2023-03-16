@@ -31,6 +31,10 @@ const displayController = (() => {
     taskModal.style.display = 'none';
   };
 
+  const displayTaskModal = () => {
+    taskModal.style.display = 'flex';
+  };
+
   const displayNewProject = () => {
     incrementByOne();
     dynamicProjectContainer.innerHTML += String.raw`
@@ -119,6 +123,7 @@ const displayController = (() => {
 
   return {
     hideModals,
+    displayTaskModal,
     displayNewProject,
     clearForms,
     displayTasks,
