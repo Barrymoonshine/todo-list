@@ -63,8 +63,9 @@ const displayController = (() => {
       dynamicListContainer.removeChild(dynamicListContainer.firstChild);
     }
     // Add tasks, including new task
+
     tasksHolder.myTasks.forEach((item, index) => {
-      dynamicListContainer.innerHTML = +String.raw`
+      dynamicListContainer.innerHTML += String.raw`
         <div class='my-tasks' id='${index}'>
         <div>
           <p>Title: ${item.title}</p> 

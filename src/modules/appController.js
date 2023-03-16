@@ -11,10 +11,10 @@ const appController = (() => {
   });
 
   const addNewTask = () => {
-    const title = formValueProvider.titleValue;
-    const description = formValueProvider.descriptionValue;
-    const priority = formValueProvider.priorityValue;
-    const dueDate = formValueProvider.dueDateValue;
+    const title = formValueProvider.getTaskFormValues().titleValue;
+    const description = formValueProvider.getTaskFormValues().descriptionValue;
+    const priority = formValueProvider.getTaskFormValues().priorityValue;
+    const dueDate = formValueProvider.getTaskFormValues().dueDateValue;
     const newTask = TasksFactory(title, description, priority, dueDate);
     tasksHolder.myTasks.push(newTask);
   };
