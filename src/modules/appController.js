@@ -3,6 +3,9 @@ import formValueProvider from './formValueProvider.js';
 import tasksHolder from './tasksHolder.js';
 
 const appController = (() => {
+  const submitNewProjectForm = document.getElementById('new-project-form');
+  const submitNewTaskForm = document.getElementById('new-task-form');
+
   const TasksFactory = (title, description, priority, dueDate) => ({
     title,
     description,
@@ -19,11 +22,6 @@ const appController = (() => {
     tasksHolder.myTasks.push(newTask);
   };
 
-  const submitNewProjectButton = document.getElementById(
-    'submit-project-button'
-  );
-  const submitNewTaskButton = document.getElementById('submit-task-button');
-
   const handleProjectForm = (e) => {
     e.preventDefault();
     displayController.displayNewProject();
@@ -39,11 +37,11 @@ const appController = (() => {
     displayController.clearForms();
   };
 
-  submitNewProjectButton.addEventListener('click', (e) => {
+  submitNewProjectForm.addEventListener('submit', (e) => {
     handleProjectForm(e);
   });
 
-  submitNewTaskButton.addEventListener('click', (e) => {
+  submitNewTaskForm.addEventListener('submit', (e) => {
     handleTaskForm(e);
   });
 

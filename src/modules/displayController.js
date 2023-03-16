@@ -51,6 +51,14 @@ const displayController = (() => {
   const clearForms = () => {
     const projectName = document.getElementById('project-name');
     projectName.value = '';
+    const titleValue = document.getElementById('task-title');
+    const descriptionValue = document.getElementById('description');
+    const priorityValue = document.getElementById('priority');
+    const dueDateValue = document.getElementById('due-date');
+    titleValue.value = '';
+    descriptionValue.value = '';
+    priorityValue.value = '';
+    dueDateValue.value = '';
   };
 
   const displayProject = (targetProjectName) => {
