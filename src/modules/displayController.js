@@ -39,9 +39,7 @@ const displayController = (() => {
     // Add back projects, including new project
     dataHolder.myProjects.forEach((item, index) => {
       dynamicProjectContainer.innerHTML += String.raw`
-    <button id='project-button-${index}'>
-    ${item} 
-    </button>
+    <button id='project-button-${index}'>${item}</button>
   `;
     });
   };
@@ -91,6 +89,7 @@ const displayController = (() => {
     while (dynamicTasksContainer.firstChild) {
       dynamicTasksContainer.removeChild(dynamicTasksContainer.firstChild);
     }
+    console.log(`target project display tasks: ${targetProjectName}`);
     // Add back tasks, including new task
     dataHolder.myTasks.forEach((item, index) => {
       if (item.project === targetProjectName) {
@@ -149,6 +148,7 @@ const displayController = (() => {
 
   dynamicProjectContainer.addEventListener('click', (e) => {
     const targetProjectName = e.target.textContent;
+    console.log(`target project dynamic project tasks: ${targetProjectName}`);
     displayProjectName(targetProjectName);
     displayTasks(targetProjectName);
   });
