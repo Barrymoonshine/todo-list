@@ -20,7 +20,7 @@ const displayController = (() => {
   const dynamicTasksContainer = document.getElementById(
     'dynamic-tasks-container'
   );
-  // const projectDropDown = document.getElementById('project-drop-down');
+  const projectDropDown = document.getElementById('project-drop-down');
 
   const hideModals = () => {
     projectModal.style.display = 'none';
@@ -65,6 +65,7 @@ const displayController = (() => {
     descriptionValue.value = '';
     priorityValue.value = '';
     dueDateValue.value = '';
+    projectDropDown.innerHTML = '';
   };
 
   const displayProject = (targetProjectName) => {
@@ -127,16 +128,13 @@ const displayController = (() => {
     }
   };
 
-  // const displayProjectDropDown = () => {
-  //   projectDropDown.innerHTML = String.Raw`
-  //   <label for="Project">Project:</label>
-  //     <select name="priority" id="priority">
-  //       <option value="Low" selected="selected">Low</option>
-  //       <option value="Medium">Medium</option>
-  //       <option value="High">High</option>
-  //     </select>
-  //   `;
-  // };
+  const displayProjectDropDown = () => {
+    dataHolder.myProjects.forEach((item) => {
+      projectDropDown.innerHTML += String.raw`
+          <option value="${item}">${item}</option>
+      `;
+    });
+  };
 
   newProjectButton.addEventListener('click', () => {
     projectModal.style.display = 'flex';
@@ -155,7 +153,7 @@ const displayController = (() => {
   newTaskButton.addEventListener('click', () => {
     taskModal.style.display = 'flex';
     pageContainer.style.backgroundColor = 'rgba (0,0,0,0.4)';
-    // displayProjectDropDown();
+    displayProjectDropDown();
     closeTaskFormBtn.addEventListener('click', () => {
       hideModals();
     });
