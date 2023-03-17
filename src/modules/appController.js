@@ -1,6 +1,6 @@
 import displayController from './displayController.js';
 import formValueProvider from './formValueProvider.js';
-import tasksHolder from './tasksHolder.js';
+import dataHolder from './dataHolder.js';
 
 const appController = (() => {
   const submitNewProjectForm = document.getElementById('new-project-form');
@@ -25,17 +25,23 @@ const appController = (() => {
     const dueDate = formValueProvider.getTaskFormValues().dueDateValue;
     const newTask = TasksFactory(title, description, priority, dueDate);
     if (editMode === false) {
-      tasksHolder.myTasks.push(newTask);
+      dataHolder.myTasks.push(newTask);
     } else if (editMode === true) {
-      tasksHolder.myTasks.splice(index, 1, newTask);
+      dataHolder.myTasks.splice(index, 1, newTask);
       editMode = false;
       index = '';
     }
   };
 
+  const addProject = () => {
+    const projectName = formValueProvider.getProjectName();
+    dataHolder.myProjects.push(projectName);
+  };
+
   const handleProjectForm = (e) => {
     e.preventDefault();
-    displayController.displayNewProject();
+    addProject();
+    displayController.displayProjects();
     displayController.hideModals();
     displayController.clearForms();
   };
@@ -58,14 +64,14 @@ const appController = (() => {
     const descriptionValue = document.getElementById('description');
     const priorityValue = document.getElementById('priority');
     const dueDateValue = document.getElementById('due-date');
-    titleValue.value = tasksHolder.myTasks[indexPosition].title;
-    descriptionValue.value = tasksHolder.myTasks[indexPosition].description;
-    priorityValue.value = tasksHolder.myTasks[indexPosition].priority;
-    dueDateValue.value = tasksHolder.myTasks[indexPosition].dueDate;
+    titleValue.value = dataHolder.myTasks[indexPosition].title;
+    descriptionValue.value = dataHolder.myTasks[indexPosition].description;
+    priorityValue.value = dataHolder.myTasks[indexPosition].priority;
+    dueDateValue.value = dataHolder.myTasks[indexPosition].dueDate;
   };
 
   const deleteTask = (e) => {
-    tasksHolder.myTasks.splice(getIndexPosition(e), 1);
+    dataHolder.myTasks.splice(getIndexPosition(e), 1);
     displayController.displayTasks();
   };
 
@@ -81,7 +87,7 @@ const appController = (() => {
   };
 
   const togglePriority = (e) => {
-    const targetTask = tasksHolder.myTasks[getIndexPosition(e)];
+    const targetTask = dataHolder.myTasks[getIndexPosition(e)];
     if (targetTask.priority === 'Low') {
       targetTask.priority = 'Medium';
     } else if (targetTask.priority === 'Medium') {
@@ -96,7 +102,7 @@ const appController = (() => {
   const completeTask = (e) => {
     setTimeout(() => {
       deleteTask(e);
-    }, 100);
+    }, 1000);
   };
 
   submitNewProjectForm.addEventListener('submit', (e) => {

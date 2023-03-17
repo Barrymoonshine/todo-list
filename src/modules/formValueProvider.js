@@ -1,6 +1,11 @@
 const formValueProvider = (() => {
   const getProjectName = () => {
     const projectName = document.getElementById('project-name').value;
+    // If no project name has been provided by the user on the tasks form
+    // This function returns the default project: My Tasks
+    if (projectName === '') {
+      return 'My Tasks';
+    }
     return projectName;
   };
 
@@ -15,17 +20,6 @@ const formValueProvider = (() => {
       priorityValue,
       dueDateValue,
     };
-  };
-
-  const addTaskToForm = () => {
-    const titleValue = document.getElementById('task-title');
-    const descriptionValue = document.getElementById('description');
-    const priorityValue = document.getElementById('priority');
-    const dueDateValue = document.getElementById('due-date');
-    titleValue.value = '';
-    descriptionValue.value = '';
-    priorityValue.value = '';
-    dueDateValue.value = '';
   };
 
   return {

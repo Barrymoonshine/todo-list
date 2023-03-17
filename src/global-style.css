@@ -34,6 +34,11 @@ button {
   padding-top: 20px;
 }
 
+/* Hides the My Tasks project button*/
+#project-button-0 {
+  display: none;
+}
+
 .project-modal,
 .task-modal {
   display: none;

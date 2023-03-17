@@ -1,5 +1,5 @@
 import formValueProvider from './formValueProvider.js';
-import tasksHolder from './tasksHolder.js';
+import dataHolder from './dataHolder.js';
 
 const displayController = (() => {
   const pageContainer = document.getElementById('main-page-container');
@@ -20,11 +20,7 @@ const displayController = (() => {
   const dynamicTasksContainer = document.getElementById(
     'dynamic-tasks-container'
   );
-  let counter = 0;
-
-  const incrementByOne = () => {
-    counter += 1;
-  };
+  // const projectDropDown = document.getElementById('project-drop-down');
 
   const hideModals = () => {
     projectModal.style.display = 'none';
@@ -35,13 +31,19 @@ const displayController = (() => {
     taskModal.style.display = 'flex';
   };
 
-  const displayNewProject = () => {
-    incrementByOne();
-    dynamicProjectContainer.innerHTML += String.raw`
-    <button id='project-button-${counter}'>
-    ${formValueProvider.getProjectName()} 
+  const displayProjects = () => {
+    // Remove previous projects
+    while (dynamicProjectContainer.firstChild) {
+      dynamicProjectContainer.removeChild(dynamicProjectContainer.firstChild);
+    }
+    // Add back projects, including new project
+    dataHolder.myProjects.forEach((item, index) => {
+      dynamicProjectContainer.innerHTML += String.raw`
+    <button id='project-button-${index}'>
+    ${item} 
     </button>
   `;
+    });
   };
 
   const clickWindowCloseModal = () => {
@@ -89,7 +91,7 @@ const displayController = (() => {
       dynamicTasksContainer.removeChild(dynamicTasksContainer.firstChild);
     }
     // Add back tasks, including new task
-    tasksHolder.myTasks.forEach((item, index) => {
+    dataHolder.myTasks.forEach((item, index) => {
       dynamicTasksContainer.innerHTML += String.raw`
         <div class="my-tasks">
         <div class="task-nav" id="task-nav-${index}">
@@ -125,6 +127,17 @@ const displayController = (() => {
     }
   };
 
+  // const displayProjectDropDown = () => {
+  //   projectDropDown.innerHTML = String.Raw`
+  //   <label for="Project">Project:</label>
+  //     <select name="priority" id="priority">
+  //       <option value="Low" selected="selected">Low</option>
+  //       <option value="Medium">Medium</option>
+  //       <option value="High">High</option>
+  //     </select>
+  //   `;
+  // };
+
   newProjectButton.addEventListener('click', () => {
     projectModal.style.display = 'flex';
     pageContainer.style.backgroundColor = 'rgba (0,0,0,0.4)';
@@ -142,6 +155,7 @@ const displayController = (() => {
   newTaskButton.addEventListener('click', () => {
     taskModal.style.display = 'flex';
     pageContainer.style.backgroundColor = 'rgba (0,0,0,0.4)';
+    // displayProjectDropDown();
     closeTaskFormBtn.addEventListener('click', () => {
       hideModals();
     });
@@ -151,7 +165,7 @@ const displayController = (() => {
   return {
     hideModals,
     displayTaskModal,
-    displayNewProject,
+    displayProjects,
     clearForms,
     displayTasks,
     toggleTaskDisplay,
