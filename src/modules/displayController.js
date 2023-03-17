@@ -68,9 +68,7 @@ const displayController = (() => {
   };
 
   const displayProjectName = (targetProjectName) => {
-    projectTitle.innerHTML = String.raw`
-    ${targetProjectName}
-    `;
+    projectTitle.innerHTML = String.raw`${targetProjectName}`;
   };
 
   // const stylePriorityButton = () => {
@@ -136,6 +134,11 @@ const displayController = (() => {
     });
   };
 
+  const getCurrentProject = () => {
+    const currentProject = projectTitle.textContent;
+    return currentProject;
+  };
+
   myTasksButton.addEventListener('click', (e) => {
     const targetProjectName = e.target.textContent;
     displayProjectName(targetProjectName);
@@ -175,6 +178,7 @@ const displayController = (() => {
     clearForms,
     displayTasks,
     toggleTaskDisplay,
+    getCurrentProject,
   };
 })();
 

@@ -6,7 +6,7 @@ const appController = (() => {
   const submitNewProjectForm = document.getElementById('new-project-form');
   const submitNewTaskForm = document.getElementById('new-task-form');
   const dynamicTasksContainer = document.getElementById(
-    'dynamic-tasks-container',
+    'dynamic-tasks-container'
   );
   let editMode = false;
   let index = '';
@@ -30,7 +30,7 @@ const appController = (() => {
       title,
       description,
       priority,
-      dueDate,
+      dueDate
     );
     if (editMode === false) {
       dataHolder.myTasks.push(newTask);
@@ -55,11 +55,11 @@ const appController = (() => {
   };
 
   const handleTaskForm = (e) => {
-    const projectName = formValueProvider.getTaskFormValues().projectValue;
     e.preventDefault();
     addTask();
-    displayController.displayProjectName(projectName);
-    displayController.displayTasks(projectName);
+    displayController.displayProjectName(displayController.getCurrentProject());
+    console.log(displayController.getCurrentProject());
+    displayController.displayTasks(displayController.getCurrentProject());
     displayController.hideModals();
     displayController.clearForms();
   };
@@ -82,12 +82,12 @@ const appController = (() => {
 
   const deleteTask = (e) => {
     dataHolder.myTasks.splice(getIndexPosition(e), 1);
-    displayController.displayTasks();
+    displayController.displayTasks(displayController.getCurrentProject());
   };
 
   const editTask = (e) => {
     addTaskToForm(getIndexPosition(e));
-    displayController.displayTaskModal();
+    displayController.displayTaskModal(displayController.getCurrentProject());
     editMode = true;
     index = getIndexPosition(e);
   };
@@ -106,7 +106,7 @@ const appController = (() => {
       targetTask.priority = 'Low';
     }
     // displayController.stylePriorityButton();
-    displayController.displayTasks();
+    displayController.displayTasks(displayController.getCurrentProject());
   };
 
   const completeTask = (e) => {
