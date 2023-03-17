@@ -68,8 +68,7 @@ const displayController = (() => {
     projectDropDown.innerHTML = '';
   };
 
-  const displayProject = (targetProjectName) => {
-    taskButtonContainer.style.display = 'flex';
+  const displayProjectName = (targetProjectName) => {
     projectTitle.innerHTML = String.raw`
     ${targetProjectName}
     `;
@@ -86,14 +85,16 @@ const displayController = (() => {
   //   }
   // };
 
-  const displayTasks = () => {
+  const displayTasks = (targetProjectName) => {
+    taskButtonContainer.style.display = 'flex';
     // Remove previous tasks
     while (dynamicTasksContainer.firstChild) {
       dynamicTasksContainer.removeChild(dynamicTasksContainer.firstChild);
     }
     // Add back tasks, including new task
     dataHolder.myTasks.forEach((item, index) => {
-      dynamicTasksContainer.innerHTML += String.raw`
+      if (item.project === targetProjectName) {
+        dynamicTasksContainer.innerHTML += String.raw`
         <div class="my-tasks">
         <div class="task-nav" id="task-nav-${index}">
           <input 
@@ -113,6 +114,7 @@ const displayController = (() => {
           <p>Due date: ${item.dueDate}</p> 
         </div>
       `;
+      }
     });
   };
 
@@ -147,7 +149,8 @@ const displayController = (() => {
 
   dynamicProjectContainer.addEventListener('click', (e) => {
     const targetProjectName = e.target.textContent;
-    displayProject(targetProjectName);
+    displayProjectName(targetProjectName);
+    displayTasks(targetProjectName);
   });
 
   newTaskButton.addEventListener('click', () => {
@@ -162,8 +165,9 @@ const displayController = (() => {
 
   return {
     hideModals,
-    displayTaskModal,
     displayProjects,
+    displayTaskModal,
+    displayProjectName,
     clearForms,
     displayTasks,
     toggleTaskDisplay,

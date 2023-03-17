@@ -11,7 +11,8 @@ const appController = (() => {
   let editMode = false;
   let index = '';
 
-  const TasksFactory = (title, description, priority, dueDate) => ({
+  const TasksFactory = (project, title, description, priority, dueDate) => ({
+    project,
     title,
     description,
     priority,
@@ -19,11 +20,18 @@ const appController = (() => {
   });
 
   const addTask = () => {
+    const project = formValueProvider.getTaskFormValues().projectValue;
     const title = formValueProvider.getTaskFormValues().titleValue;
     const description = formValueProvider.getTaskFormValues().descriptionValue;
     const priority = formValueProvider.getTaskFormValues().priorityValue;
     const dueDate = formValueProvider.getTaskFormValues().dueDateValue;
-    const newTask = TasksFactory(title, description, priority, dueDate);
+    const newTask = TasksFactory(
+      project,
+      title,
+      description,
+      priority,
+      dueDate
+    );
     if (editMode === false) {
       dataHolder.myTasks.push(newTask);
     } else if (editMode === true) {
@@ -47,9 +55,10 @@ const appController = (() => {
   };
 
   const handleTaskForm = (e) => {
+    const projectName = formValueProvider.getTaskFormValues().projectValue;
     e.preventDefault();
     addTask();
-    displayController.displayTasks();
+    displayController.displayTasks(projectName);
     displayController.hideModals();
     displayController.clearForms();
   };
