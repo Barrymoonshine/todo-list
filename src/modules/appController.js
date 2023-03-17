@@ -58,8 +58,7 @@ const appController = (() => {
     e.preventDefault();
     addTask();
     displayController.displayProjectName(displayController.getCurrentProject());
-    console.log(displayController.getCurrentProject());
-    displayController.displayTasks(displayController.getCurrentProject());
+    displayController.handleTasksDisplay(displayController.getCurrentProject());
     displayController.hideModals();
     displayController.clearForms();
   };
@@ -82,7 +81,7 @@ const appController = (() => {
 
   const deleteTask = (e) => {
     dataHolder.myTasks.splice(getIndexPosition(e), 1);
-    displayController.displayTasks(displayController.getCurrentProject());
+    displayController.handleTasksDisplay(displayController.getCurrentProject());
   };
 
   const editTask = (e) => {
@@ -106,7 +105,7 @@ const appController = (() => {
       targetTask.priority = 'Low';
     }
     // displayController.stylePriorityButton();
-    displayController.displayTasks(displayController.getCurrentProject());
+    displayController.handleTasksDisplay(displayController.getCurrentProject());
   };
 
   const completeTask = (e) => {

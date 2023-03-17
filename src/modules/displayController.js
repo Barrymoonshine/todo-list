@@ -22,6 +22,7 @@ const displayController = (() => {
   );
   const projectDropDown = document.getElementById('project-drop-down');
   const myTasksButton = document.getElementById('my-tasks-button');
+  const allTasksButton = document.getElementById('all-tasks-button');
 
   const hideModals = () => {
     projectModal.style.display = 'none';
@@ -82,35 +83,60 @@ const displayController = (() => {
   //   }
   // };
 
-  const displayTasks = (targetProjectName) => {
-    // Remove previous tasks
+  const handleTasksDisplay = (targetProjectName) => {
+    removeTasks();
+    // If the user has selected a project or My Tasks to display
+    if (targetProjectName !== 'All Tasks') {
+      identifyTasks(targetProjectName);
+    } else {
+      displayAllTasks();
+      console.log(
+        `target project name, display all tasks?: ${targetProjectName}`
+      );
+    }
+  };
+
+  const removeTasks = () => {
     while (dynamicTasksContainer.firstChild) {
       dynamicTasksContainer.removeChild(dynamicTasksContainer.firstChild);
     }
-    // Add back tasks, including new task
+  };
+
+  const displayTask = (item, index) => {
+    dynamicTasksContainer.innerHTML += String.raw`
+    <div class="my-tasks">
+    <div class="task-nav" id="task-nav-${index}">
+      <input 
+      type="checkbox" 
+      id="task-complete-${index}"
+      />
+      <div class="task-title">Title: ${item.title}</div>
+      <button id="edit-${index}">Edit</button>
+      <button id="priority-${index}">${item.priority}</button>
+      <button id="delete-${index}">Delete</button>
+      <button id="expand-${index}">Expand</button>
+    </div>  
+    <div class="task-content" id="task-content-${index}">
+      <p>Title: ${item.title}</p> 
+      <p>Description: ${item.description}</p> 
+      <p>Priority: ${item.priority}</p> 
+      <p>Due date: ${item.dueDate}</p> 
+    </div>
+  `;
+  };
+
+  const identifyTasks = (targetProjectName) => {
+    // Identifies the target projects tasks
     dataHolder.myTasks.forEach((item, index) => {
       if (item.project === targetProjectName) {
-        dynamicTasksContainer.innerHTML += String.raw`
-        <div class="my-tasks">
-        <div class="task-nav" id="task-nav-${index}">
-          <input 
-          type="checkbox" 
-          id="task-complete-${index}"
-          />
-          <div class="task-title">Title: ${item.title}</div>
-          <button id="edit-${index}">Edit</button>
-          <button id="priority-${index}">${item.priority}</button>
-          <button id="delete-${index}">Delete</button>
-          <button id="expand-${index}">Expand</button>
-        </div>  
-        <div class="task-content" id="task-content-${index}">
-          <p>Title: ${item.title}</p> 
-          <p>Description: ${item.description}</p> 
-          <p>Priority: ${item.priority}</p> 
-          <p>Due date: ${item.dueDate}</p> 
-        </div>
-      `;
+        displayTask(item, index);
       }
+    });
+  };
+
+  const displayAllTasks = () => {
+    dataHolder.myTasks.forEach((item, index) => {
+      displayTask(item, index);
     });
   };
 
@@ -142,7 +168,13 @@ const displayController = (() => {
   myTasksButton.addEventListener('click', (e) => {
     const targetProjectName = e.target.textContent;
     displayProjectName(targetProjectName);
-    displayTasks(targetProjectName);
+    handleTasksDisplay(targetProjectName);
+  });
+
+  allTasksButton.addEventListener('click', (e) => {
+    const target = e.target.textContent;
+    displayProjectName(target);
+    handleTasksDisplay(target);
   });
 
   newProjectButton.addEventListener('click', () => {
@@ -157,7 +189,7 @@ const displayController = (() => {
   dynamicProjectContainer.addEventListener('click', (e) => {
     const targetProjectName = e.target.textContent;
     displayProjectName(targetProjectName);
-    displayTasks(targetProjectName);
+    handleTasksDisplay(targetProjectName);
   });
 
   newTaskButton.addEventListener('click', () => {
@@ -176,7 +208,7 @@ const displayController = (() => {
     displayTaskModal,
     displayProjectName,
     clearForms,
-    displayTasks,
+    handleTasksDisplay,
     toggleTaskDisplay,
     getCurrentProject,
   };
