@@ -21,6 +21,7 @@ const displayController = (() => {
     'dynamic-tasks-container'
   );
   const projectDropDown = document.getElementById('project-drop-down');
+  const myTasksButton = document.getElementById('my-tasks-button');
 
   const hideModals = () => {
     projectModal.style.display = 'none';
@@ -84,12 +85,10 @@ const displayController = (() => {
   // };
 
   const displayTasks = (targetProjectName) => {
-    taskButtonContainer.style.display = 'flex';
     // Remove previous tasks
     while (dynamicTasksContainer.firstChild) {
       dynamicTasksContainer.removeChild(dynamicTasksContainer.firstChild);
     }
-    console.log(`target project display tasks: ${targetProjectName}`);
     // Add back tasks, including new task
     dataHolder.myTasks.forEach((item, index) => {
       if (item.project === targetProjectName) {
@@ -137,6 +136,12 @@ const displayController = (() => {
     });
   };
 
+  myTasksButton.addEventListener('click', (e) => {
+    const targetProjectName = e.target.textContent;
+    displayProjectName(targetProjectName);
+    displayTasks(targetProjectName);
+  });
+
   newProjectButton.addEventListener('click', () => {
     projectModal.style.display = 'flex';
     pageContainer.style.backgroundColor = 'rgba (0,0,0,0.4)';
@@ -148,7 +153,6 @@ const displayController = (() => {
 
   dynamicProjectContainer.addEventListener('click', (e) => {
     const targetProjectName = e.target.textContent;
-    console.log(`target project dynamic project tasks: ${targetProjectName}`);
     displayProjectName(targetProjectName);
     displayTasks(targetProjectName);
   });

@@ -6,7 +6,7 @@ const appController = (() => {
   const submitNewProjectForm = document.getElementById('new-project-form');
   const submitNewTaskForm = document.getElementById('new-task-form');
   const dynamicTasksContainer = document.getElementById(
-    'dynamic-tasks-container'
+    'dynamic-tasks-container',
   );
   let editMode = false;
   let index = '';
@@ -30,7 +30,7 @@ const appController = (() => {
       title,
       description,
       priority,
-      dueDate
+      dueDate,
     );
     if (editMode === false) {
       dataHolder.myTasks.push(newTask);
@@ -58,6 +58,7 @@ const appController = (() => {
     const projectName = formValueProvider.getTaskFormValues().projectValue;
     e.preventDefault();
     addTask();
+    displayController.displayProjectName(projectName);
     displayController.displayTasks(projectName);
     displayController.hideModals();
     displayController.clearForms();

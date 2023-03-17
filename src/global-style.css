@@ -86,10 +86,6 @@ button {
   text-align: center;
 }
 
-.task-button {
-  display: none;
-}
-
 .task-nav {
   display: flex;
   justify-content: space-between;
