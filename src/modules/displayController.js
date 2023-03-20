@@ -44,7 +44,7 @@ const displayController = (() => {
 
   const clickWindowCloseModal = () => {
     pageContainer.addEventListener('click', (e) => {
-      if (e.target === projectModal) {
+      if (e.target === projectModal || e.target === taskModal) {
         hideModals();
       }
     });
@@ -180,7 +180,6 @@ const displayController = (() => {
 
   const handleTasksDisplay = (target) => {
     removeTasks();
-    // If the user has selected a project or My Tasks to display
     if (target === 'All Tasks') {
       displayAllTasks();
     } else if (target === 'High Priority') {
@@ -213,8 +212,6 @@ const displayController = (() => {
 
   const displayProjectDropDown = () => {
     dataHolder.myProjects.forEach((item) => {
-      console.log(`item: ${item}`);
-      console.log(`projectTitle: ${projectTitle.textContent}`);
       if (item === projectTitle.textContent) {
         projectDropDown.innerHTML += String.raw`
           <option value="${item}" selected="selected">${item}</option>
@@ -254,13 +251,13 @@ const displayController = (() => {
   });
 
   newTaskButton.addEventListener('click', () => {
+    clickWindowCloseModal();
     taskModal.style.display = 'flex';
     pageContainer.style.backgroundColor = 'rgba (0,0,0,0.4)';
     displayProjectDropDown();
     closeTaskFormBtn.addEventListener('click', () => {
       hideModals();
     });
-    clickWindowCloseModal();
   });
 
   return {
