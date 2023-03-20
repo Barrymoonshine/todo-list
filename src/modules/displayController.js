@@ -23,6 +23,7 @@ const displayController = (() => {
   const projectDropDown = document.getElementById('project-drop-down');
   const myTasksButton = document.getElementById('my-tasks-button');
   const allTasksButton = document.getElementById('all-tasks-button');
+  const highPriorityButton = document.getElementById('high-priority-button');
 
   const hideModals = () => {
     projectModal.style.display = 'none';
@@ -38,7 +39,7 @@ const displayController = (() => {
     while (dynamicProjectContainer.firstChild) {
       dynamicProjectContainer.removeChild(dynamicProjectContainer.firstChild);
     }
-    // Add back projects, including new project
+    // Add back all projects, including new project
     dataHolder.myProjects.forEach((item, index) => {
       dynamicProjectContainer.innerHTML += String.raw`
     <button id='project-button-${index}'>${item}</button>
@@ -83,19 +84,6 @@ const displayController = (() => {
   //   }
   // };
 
-  const handleTasksDisplay = (targetProjectName) => {
-    removeTasks();
-    // If the user has selected a project or My Tasks to display
-    if (targetProjectName !== 'All Tasks') {
-      identifyTasks(targetProjectName);
-    } else {
-      displayAllTasks();
-      console.log(
-        `target project name, display all tasks?: ${targetProjectName}`
-      );
-    }
-  };
-
   const removeTasks = () => {
     while (dynamicTasksContainer.firstChild) {
       dynamicTasksContainer.removeChild(dynamicTasksContainer.firstChild);
@@ -125,7 +113,7 @@ const displayController = (() => {
   `;
   };
 
-  const identifyTasks = (targetProjectName) => {
+  const identifyProjectTasks = (targetProjectName) => {
     // Identifies the target projects tasks
     dataHolder.myTasks.forEach((item, index) => {
       if (item.project === targetProjectName) {
@@ -138,6 +126,27 @@ const displayController = (() => {
     dataHolder.myTasks.forEach((item, index) => {
       displayTask(item, index);
     });
+  };
+
+  const identifyHighPriorityTasks = () => {
+    dataHolder.myTasks.forEach((item, index) => {
+      console.log(`High priority : ${item.priority}`);
+      if (item.priority === 'High') {
+        displayTask(item, index);
+      }
+    });
+  };
+
+  const handleTasksDisplay = (targetProjectName) => {
+    removeTasks();
+    // If the user has selected a project or My Tasks to display
+    if (targetProjectName === 'All Tasks') {
+      displayAllTasks();
+    } else if (targetProjectName === 'High Priority') {
+      identifyHighPriorityTasks(targetProjectName);
+    } else {
+      identifyProjectTasks(targetProjectName);
+    }
   };
 
   const toggleTaskDisplay = (index) => {
@@ -164,6 +173,12 @@ const displayController = (() => {
     const currentProject = projectTitle.textContent;
     return currentProject;
   };
+
+  highPriorityButton.addEventListener('click', (e) => {
+    const targetProjectName = e.target.textContent;
+    displayProjectName(targetProjectName);
+    handleTasksDisplay(targetProjectName);
+  });
 
   myTasksButton.addEventListener('click', (e) => {
     const targetProjectName = e.target.textContent;
