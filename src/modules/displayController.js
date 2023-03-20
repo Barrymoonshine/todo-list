@@ -1,4 +1,4 @@
-import { addMonths, isBefore, parseISO } from 'date-fns';
+import { addMonths, isBefore, parseISO, addYears } from 'date-fns';
 import formValueProvider from './formValueProvider.js';
 import dataHolder from './dataHolder.js';
 
@@ -155,6 +155,16 @@ const displayController = (() => {
     });
   };
 
+  const identifyTasksDueThisYear = () => {
+    const currentDate = getCurrentDate();
+    const nextYear = addYears(parseISO(currentDate), 1);
+    dataHolder.myTasks.forEach((item, index) => {
+      if (isBefore(parseISO(item.dueDate), nextYear) === true) {
+        displayTask(item, index);
+      }
+    });
+  };
+
   const handleTasksDisplay = (targetProjectName) => {
     removeTasks();
     // If the user has selected a project or My Tasks to display
@@ -163,10 +173,11 @@ const displayController = (() => {
     } else if (targetProjectName === 'High Priority') {
       identifyHighPriorityTasks(targetProjectName);
     } else if (targetProjectName === 'Today') {
-      console.log(' Today clicked');
       identifyTasksDueToday(targetProjectName);
     } else if (targetProjectName === 'This Month') {
       identifyTasksDueThisMonth(targetProjectName);
+    } else if (targetProjectName === 'This Year') {
+      identifyTasksDueThisYear(targetProjectName);
     } else {
       identifyProjectTasks(targetProjectName);
     }
