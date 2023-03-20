@@ -1,3 +1,4 @@
+import { addMonths, isBefore, parseISO } from 'date-fns';
 import formValueProvider from './formValueProvider.js';
 import dataHolder from './dataHolder.js';
 
@@ -130,10 +131,25 @@ const displayController = (() => {
     });
   };
 
-  const identifyTasksDueToday = () => {
+  const getCurrentDate = () => {
     const currentDate = dataHolder.date.slice(0, 10);
+    return currentDate;
+  };
+
+  const identifyTasksDueToday = () => {
+    const currentDate = getCurrentDate();
     dataHolder.myTasks.forEach((item, index) => {
       if (item.dueDate === currentDate) {
+        displayTask(item, index);
+      }
+    });
+  };
+
+  const identifyTasksDueThisMonth = () => {
+    const currentDate = getCurrentDate();
+    const nextMonth = addMonths(parseISO(currentDate), 1);
+    dataHolder.myTasks.forEach((item, index) => {
+      if (isBefore(parseISO(item.dueDate), nextMonth) === true) {
         displayTask(item, index);
       }
     });
@@ -149,6 +165,8 @@ const displayController = (() => {
     } else if (targetProjectName === 'Today') {
       console.log(' Today clicked');
       identifyTasksDueToday(targetProjectName);
+    } else if (targetProjectName === 'This Month') {
+      identifyTasksDueThisMonth(targetProjectName);
     } else {
       identifyProjectTasks(targetProjectName);
     }
