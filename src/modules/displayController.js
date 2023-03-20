@@ -213,9 +213,17 @@ const displayController = (() => {
 
   const displayProjectDropDown = () => {
     dataHolder.myProjects.forEach((item) => {
-      projectDropDown.innerHTML += String.raw`
+      console.log(`item: ${item}`);
+      console.log(`projectTitle: ${projectTitle.textContent}`);
+      if (item === projectTitle.textContent) {
+        projectDropDown.innerHTML += String.raw`
+          <option value="${item}" selected="selected">${item}</option>
+      `;
+      } else {
+        projectDropDown.innerHTML += String.raw`
           <option value="${item}">${item}</option>
       `;
+      }
     });
   };
 
