@@ -1,7 +1,8 @@
 const dataHolder = (() => {
   const myTasks = [];
   const myProjects = [['My Tasks']];
-  return { myTasks, myProjects };
+  const date = new Date().toJSON();
+  return { myTasks, myProjects, date };
 })();
 
 export default dataHolder;

@@ -8,22 +8,16 @@ const displayController = (() => {
   const taskModal = document.getElementById('new-task-modal');
   const closeTaskFormBtn = document.getElementById('close-task-form');
   const newProjectButton = document.getElementById('add-project-button');
-  const taskButtonContainer = document.getElementById('task-button-container');
   const newTaskButton = document.getElementById('add-task-button');
   const projectTitle = document.getElementById('project-title');
   const dynamicProjectContainer = document.getElementById(
     'dynamic-project-container'
   );
-  const dynamicListContainer = document.getElementById(
-    'dynamic-list-container'
-  );
   const dynamicTasksContainer = document.getElementById(
     'dynamic-tasks-container'
   );
   const projectDropDown = document.getElementById('project-drop-down');
-  const myTasksButton = document.getElementById('my-tasks-button');
-  const allTasksButton = document.getElementById('all-tasks-button');
-  const highPriorityButton = document.getElementById('high-priority-button');
+  const sideBarNav = document.getElementById('side-bar-nav');
 
   const hideModals = () => {
     projectModal.style.display = 'none';
@@ -130,8 +124,16 @@ const displayController = (() => {
 
   const identifyHighPriorityTasks = () => {
     dataHolder.myTasks.forEach((item, index) => {
-      console.log(`High priority : ${item.priority}`);
       if (item.priority === 'High') {
+        displayTask(item, index);
+      }
+    });
+  };
+
+  const identifyTasksDueToday = () => {
+    const currentDate = dataHolder.date.slice(0, 10);
+    dataHolder.myTasks.forEach((item, index) => {
+      if (item.dueDate === currentDate) {
         displayTask(item, index);
       }
     });
@@ -144,6 +146,9 @@ const displayController = (() => {
       displayAllTasks();
     } else if (targetProjectName === 'High Priority') {
       identifyHighPriorityTasks(targetProjectName);
+    } else if (targetProjectName === 'Today') {
+      console.log(' Today clicked');
+      identifyTasksDueToday(targetProjectName);
     } else {
       identifyProjectTasks(targetProjectName);
     }
@@ -174,22 +179,10 @@ const displayController = (() => {
     return currentProject;
   };
 
-  highPriorityButton.addEventListener('click', (e) => {
+  sideBarNav.addEventListener('click', (e) => {
     const targetProjectName = e.target.textContent;
     displayProjectName(targetProjectName);
     handleTasksDisplay(targetProjectName);
-  });
-
-  myTasksButton.addEventListener('click', (e) => {
-    const targetProjectName = e.target.textContent;
-    displayProjectName(targetProjectName);
-    handleTasksDisplay(targetProjectName);
-  });
-
-  allTasksButton.addEventListener('click', (e) => {
-    const target = e.target.textContent;
-    displayProjectName(target);
-    handleTasksDisplay(target);
   });
 
   newProjectButton.addEventListener('click', () => {
