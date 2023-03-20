@@ -87,10 +87,13 @@ const displayController = (() => {
 
   const displayOpenTask = (item, index) => {
     const task = document.getElementById(`task-content-${index}`);
+    const targetButton = document.getElementById(`expand-${index}`);
     if (item.open === true) {
       task.style.display = 'flex';
+      targetButton.textContent = 'Minimise';
     } else if (item.open === false) {
       task.style.display = 'none';
+      targetButton.textContent = 'Expand';
     }
   };
 
