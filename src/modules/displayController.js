@@ -85,6 +85,15 @@ const displayController = (() => {
     }
   };
 
+  const displayOpenTask = (item, index) => {
+    const task = document.getElementById(`task-content-${index}`);
+    if (item.open === true) {
+      task.style.display = 'flex';
+    } else if (item.open === false) {
+      task.style.display = 'none';
+    }
+  };
+
   const displayTask = (item, index) => {
     dynamicTasksContainer.innerHTML += String.raw`
     <div class="my-tasks">
@@ -106,6 +115,7 @@ const displayController = (() => {
       <p>Due date: ${item.dueDate}</p> 
     </div>
   `;
+    displayOpenTask(item, index);
   };
 
   const identifyProjectTasks = (targetProjectName) => {
@@ -184,14 +194,17 @@ const displayController = (() => {
   };
 
   const toggleTaskView = (index) => {
+    const task = dataHolder.myTasks[index];
     const targetContent = document.getElementById(`task-content-${index}`);
     const targetButton = document.getElementById(`expand-${index}`);
-    if (targetButton.textContent === 'Expand') {
+    if (task.open === false) {
       targetContent.style.display = 'flex';
       targetButton.textContent = 'Minimise';
+      task.open = true;
     } else {
       targetContent.style.display = 'none';
       targetButton.textContent = 'Expand';
+      task.open = false;
     }
   };
 

@@ -11,12 +11,20 @@ const appController = (() => {
   let editMode = false;
   let index = '';
 
-  const TasksFactory = (project, title, description, priority, dueDate) => ({
+  const TasksFactory = (
     project,
     title,
     description,
     priority,
     dueDate,
+    open
+  ) => ({
+    project,
+    title,
+    description,
+    priority,
+    dueDate,
+    open,
   });
 
   const addTask = () => {
@@ -25,12 +33,14 @@ const appController = (() => {
     const description = formValueProvider.getTaskFormValues().descriptionValue;
     const priority = formValueProvider.getTaskFormValues().priorityValue;
     const dueDate = formValueProvider.getTaskFormValues().dueDateValue;
+    const open = false;
     const newTask = TasksFactory(
       project,
       title,
       description,
       priority,
-      dueDate
+      dueDate,
+      open
     );
     if (editMode === false) {
       dataHolder.myTasks.push(newTask);
