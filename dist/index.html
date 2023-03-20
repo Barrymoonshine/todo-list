@@ -7,12 +7,12 @@
     <title>To do list</title>
   </head>
   <body>
-    <div class="page-container" id="main-page-container">
+    <div id="page-container">
       <div id="page-header" class="header">
         <img class="list-icon" src="../src/assets/images/list.png" alt="List icon"> To Do List
       </div>
       <div class="sidebar">
-        <ul class="sidebar-home" id="side-bar-nav">
+        <ul id="side-bar-nav">
           Home
           <li><button id="my-tasks-button">My Tasks</button></li>
           <li><button id="all-tasks-button">All Tasks</button></li>
@@ -51,7 +51,7 @@
         </ul>
       </div>
       <main>
-        <div id="dynamic-list-container" class="dynamic-content-container">
+        <div class="main-content-container">
           <div id="project-title">My Tasks</div>
           <div id="dynamic-tasks-container"></div>
           <div class="task-button" id="task-button-container">
@@ -98,8 +98,6 @@
                   type="date" 
                   id="due-date" 
                   name="due-date"
-                  value="2023-03-15"
-                  min="2023-03-15"
                   required 
                   >
                   </li>

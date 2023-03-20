@@ -3,7 +3,7 @@ import formValueProvider from './formValueProvider.js';
 import dataHolder from './dataHolder.js';
 
 const displayController = (() => {
-  const pageContainer = document.getElementById('main-page-container');
+  const pageContainer = document.getElementById('page-container');
   const projectModal = document.getElementById('new-project-modal');
   const closeProjectFormBtn = document.getElementById('close-project-form');
   const taskModal = document.getElementById('new-task-modal');
@@ -50,6 +50,10 @@ const displayController = (() => {
     });
   };
 
+  const displayProjectName = (targetProjectName) => {
+    projectTitle.innerHTML = String.raw`${targetProjectName}`;
+  };
+
   const clearForms = () => {
     const projectName = document.getElementById('project-name');
     projectName.value = '';
@@ -62,10 +66,6 @@ const displayController = (() => {
     priorityValue.value = '';
     dueDateValue.value = '';
     projectDropDown.innerHTML = '';
-  };
-
-  const displayProjectName = (targetProjectName) => {
-    projectTitle.innerHTML = String.raw`${targetProjectName}`;
   };
 
   // const stylePriorityButton = () => {
@@ -165,25 +165,25 @@ const displayController = (() => {
     });
   };
 
-  const handleTasksDisplay = (targetProjectName) => {
+  const handleTasksDisplay = (target) => {
     removeTasks();
     // If the user has selected a project or My Tasks to display
-    if (targetProjectName === 'All Tasks') {
+    if (target === 'All Tasks') {
       displayAllTasks();
-    } else if (targetProjectName === 'High Priority') {
-      identifyHighPriorityTasks(targetProjectName);
-    } else if (targetProjectName === 'Today') {
-      identifyTasksDueToday(targetProjectName);
-    } else if (targetProjectName === 'This Month') {
-      identifyTasksDueThisMonth(targetProjectName);
-    } else if (targetProjectName === 'This Year') {
-      identifyTasksDueThisYear(targetProjectName);
+    } else if (target === 'High Priority') {
+      identifyHighPriorityTasks(target);
+    } else if (target === 'Today') {
+      identifyTasksDueToday(target);
+    } else if (target === 'This Month') {
+      identifyTasksDueThisMonth(target);
+    } else if (target === 'This Year') {
+      identifyTasksDueThisYear(target);
     } else {
-      identifyProjectTasks(targetProjectName);
+      identifyProjectTasks(target);
     }
   };
 
-  const toggleTaskDisplay = (index) => {
+  const toggleTaskView = (index) => {
     const targetContent = document.getElementById(`task-content-${index}`);
     const targetButton = document.getElementById(`expand-${index}`);
     if (targetButton.textContent === 'Expand') {
@@ -241,12 +241,12 @@ const displayController = (() => {
 
   return {
     hideModals,
-    displayProjects,
     displayTaskModal,
+    displayProjects,
     displayProjectName,
     clearForms,
     handleTasksDisplay,
-    toggleTaskDisplay,
+    toggleTaskView,
     getCurrentProject,
   };
 })();
