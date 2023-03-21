@@ -182,18 +182,19 @@ const displayController = (() => {
     // Identifies whether the user has selected a sidebar nav button to display tasks
     // or a project
     removeTasks();
-    if (target === 'all-tasks-button') {
+    console.log(`target: ${target}`);
+    if (target === 'All Tasks') {
       displayAllTasks();
-    } else if (target === 'high-priority-button') {
+    } else if (target === 'High Priority') {
       identifyHighPriorityTasks();
-    } else if (target === 'tasks-today-button') {
+    } else if (target === 'Today') {
       identifyTasksDueToday();
-    } else if (target === 'tasks-this-month-button') {
+    } else if (target === 'This Month') {
       identifyTasksDueThisMonth();
-    } else if (target === 'tasks-this-year-button') {
+    } else if (target === 'This Year') {
       identifyTasksDueThisYear();
     } else {
-      identifyProjectTasks();
+      identifyProjectTasks(target);
     }
   };
 
@@ -232,10 +233,10 @@ const displayController = (() => {
   };
 
   sideBarNav.addEventListener('click', (e) => {
-    const target = e.target.id;
-    const title = e.target.textContent;
-    if (target.includes('button')) {
-      displayProjectName(title);
+    const element = e.target.id;
+    const target = e.target.textContent;
+    if (element.includes('button')) {
+      displayProjectName(target);
       handleTasksDisplay(target);
     } else {
     }

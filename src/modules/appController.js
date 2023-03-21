@@ -6,7 +6,7 @@ const appController = (() => {
   const submitNewProjectForm = document.getElementById('new-project-form');
   const submitNewTaskForm = document.getElementById('new-task-form');
   const dynamicTasksContainer = document.getElementById(
-    'dynamic-tasks-container',
+    'dynamic-tasks-container'
   );
   let editMode = false;
   let index = '';
@@ -17,7 +17,7 @@ const appController = (() => {
     description,
     priority,
     dueDate,
-    open,
+    open
   ) => ({
     project,
     title,
@@ -40,7 +40,7 @@ const appController = (() => {
       description,
       priority,
       dueDate,
-      open,
+      open
     );
     if (editMode === false) {
       dataHolder.myTasks.push(newTask);
