@@ -36,7 +36,6 @@ button {
   display: flex;
   align-items: center;
   padding: 20px;
-  color: var(--quaternary-page-color);
 }
 
 h1 {
@@ -80,6 +79,26 @@ h1 {
   padding: 10px 0 10px 0;
   border-bottom: solid 3px black;
   margin-bottom: 10px;
+}
+
+#dynamic-project-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.project-buttons {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fca5a5;
+}
+
+.project-buttons:hover {
+  background-color: #e67d7dad;
 }
 
 #add-project-button:hover {

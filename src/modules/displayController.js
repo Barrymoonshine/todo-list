@@ -39,7 +39,7 @@ const displayController = (() => {
     // Add back all projects, including new project
     dataHolder.myProjects.forEach((item, index) => {
       dynamicProjectContainer.innerHTML += String.raw`
-    <button id='project-button-${index}'>${item}</button>
+    <button id='project-button-${index}' class="project-buttons">${item}</button>
   `;
     });
   };
