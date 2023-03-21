@@ -4,22 +4,54 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
     <title>To do list</title>
   </head>
   <body>
     <div id="page-container">
       <div id="page-header" class="header">
-        <img class="list-icon" src="../src/assets/images/list.png" alt="List icon"> To Do List
+        <h1>To Do List</h1>
       </div>
       <div class="sidebar">
         <ul id="side-bar-nav">
-          Home
-          <li><button id="my-tasks-button">My Tasks</button></li>
-          <li><button id="all-tasks-button">All Tasks</button></li>
-          <li><button id="tasks-today-button">Today</button></li>
-          <li><button id="tasks-this-month-button">This Month</button></li>
-          <li><button id="tasks-this-year-button">This Year</button></li>
-          <li><button id="high-priority-button">High Priority</button></li>
+          <li>
+            <button id="my-tasks-button" class="sidebar-buttons"> 
+              <img class="sidebar-icons" src="../src/assets/images/my-tasks.png" alt="My Tasks">
+              My Tasks
+            </button>
+          </li>
+          <li>
+            <button id="all-tasks-button" class="sidebar-buttons">
+              <img class="sidebar-icons" src="../src/assets/images/all-tasks.png" alt="All Tasks">
+              All Tasks
+            </button>
+          </li>
+          <li>
+            <button id="tasks-today-button" class="sidebar-buttons">
+              <img class="sidebar-icons" src="../src/assets/images/today.png" alt="Today"> 
+              Today
+            </button>
+          </li>
+          <li>
+            <button id="tasks-this-month-button" class="sidebar-buttons">
+              <img class="sidebar-icons" src="../src/assets/images/this-month.png" alt="This Month"> 
+              This Month
+            </button>
+          </li>
+          <li>
+            <button id="tasks-this-year-button" class="sidebar-buttons">
+              <img class="sidebar-icons" src="../src/assets/images/this-year.png" alt="This Year">
+              This Year
+            </button>
+          </li>
+          <li>
+            <button id="high-priority-button" class="sidebar-buttons">
+              <img class="sidebar-icons" src="../src/assets/images/high-priority.png" alt="High priority">
+              High Priority
+            </button>
+          </li>
         </ul>
         <ul class="side-bar-projects">
           Projects
@@ -47,8 +79,9 @@
                   </li>
                 </ul>
               </form>
-            <!--Modal end-->
-        </ul>
+            </div>
+          </div>
+        <!--Modal end-->
       </div>
       <main>
         <div class="main-content-container">
@@ -111,11 +144,12 @@
                     <button id="submit-task-button" type="submit">Submit</button>
                   </li>
                 </ul>
-              </form>
-            <!--Modal end-->
-        </ul>
+              </form>       
         </div>
-      </main>
+     </div>
+      <!--Modal end-->
+    </div>
+    </main>
       <div class="footer">
         <p>
           © Made by
