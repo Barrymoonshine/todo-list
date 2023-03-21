@@ -92,10 +92,8 @@ const displayController = (() => {
     const targetButton = document.getElementById(`expand-${index}`);
     if (item.open === true) {
       task.style.display = 'flex';
-      targetButton.textContent = 'Minimise';
     } else if (item.open === false) {
       task.style.display = 'none';
-      targetButton.textContent = 'Expand';
     }
   };
 
@@ -108,16 +106,20 @@ const displayController = (() => {
       id="task-complete-${index}"
       />
       <div class="task-title">Title: ${item.title}</div>
-      <button id="edit-${index}">Edit</button>
+      <button><img id="edit-${index}" class="task-nav-icons" src="../src/assets/images/edit.png" alt="Edit"></button>
       <button id="priority-${index}">${item.priority}</button>
-      <button id="delete-${index}">Delete</button>
-      <button id="expand-${index}">Expand</button>
+      <button><img id="delete-${index}" class="task-nav-icons" src="../src/assets/images/delete.png" alt="Delete"></button>
+      <button><img id="expand-${index}" class="task-nav-icons" src="../src/assets/images/expand.png" alt="Expand"></button>
     </div>  
     <div class="task-content" id="task-content-${index}">
-      <p>Title: ${item.title}</p> 
-      <p>Description: ${item.description}</p> 
-      <p>Priority: ${item.priority}</p> 
-      <p>Due date: ${item.dueDate}</p> 
+      <div class="task-left-content">
+        <p>Title: ${item.title}</p> 
+        <p>Description: ${item.description}</p> 
+      </div>
+      <div class="task-right-content">
+        <p>Priority: ${item.priority}</p> 
+        <p>Due date: ${item.dueDate}</p> 
+      </div>  
     </div>
   `;
     displayOpenTask(item, index);
@@ -184,7 +186,6 @@ const displayController = (() => {
     // Identifies whether the user has selected a sidebar nav button to display tasks
     // or a project
     removeTasks();
-    console.log(`target: ${target}`);
     if (target === 'All Tasks') {
       displayAllTasks();
     } else if (target === 'High Priority') {
@@ -201,16 +202,15 @@ const displayController = (() => {
   };
 
   const toggleTaskView = (index) => {
+    console.log('toggletaskview invoked');
     const task = dataHolder.myTasks[index];
     const targetContent = document.getElementById(`task-content-${index}`);
     const targetButton = document.getElementById(`expand-${index}`);
     if (task.open === false) {
       targetContent.style.display = 'flex';
-      targetButton.textContent = 'Minimise';
       task.open = true;
     } else {
       targetContent.style.display = 'none';
-      targetButton.textContent = 'Expand';
       task.open = false;
     }
   };
@@ -260,6 +260,7 @@ const displayController = (() => {
   });
 
   newTaskButton.addEventListener('click', () => {
+    clearForms();
     clickWindowCloseModal();
     taskModal.style.display = 'flex';
     pageContainer.style.backgroundColor = 'rgba (0,0,0,0.4)';

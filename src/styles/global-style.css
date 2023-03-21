@@ -265,6 +265,7 @@ input:focus,
   font-size: 40px;
   font-style: bold;
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .task-modal-content {
@@ -280,9 +281,32 @@ input:focus,
   border-radius: 5px;
 }
 
+.task-nav-icons {
+  width: 20px;
+  height: 20px;
+}
+
+#dynamic-tasks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px 0px 10px 0px;
+}
+
 .task-content {
   display: none;
-  border: 1px solid black;
+  justify-content: space-around;
+  border: 1px solid var(--primary-page-color);
+  margin-top: 5px;
+  border-radius: 5px;
+}
+
+.task-left-content,
+.task-right-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
 }
 
 .footer {
