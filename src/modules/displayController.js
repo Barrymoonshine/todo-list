@@ -5,7 +5,9 @@ import dataHolder from './dataHolder.js';
 const displayController = (() => {
   const pageContainer = document.getElementById('page-container');
   const projectModal = document.getElementById('new-project-modal');
-  const closeProjectFormBtn = document.getElementById('close-project-form');
+  const closeProjectFormBtn = document.getElementById(
+    'close-project-form-button'
+  );
   const taskModal = document.getElementById('new-task-modal');
   const closeTaskFormBtn = document.getElementById('close-task-form');
   const newProjectButton = document.getElementById('add-project-button');
