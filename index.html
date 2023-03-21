@@ -78,51 +78,58 @@
           <div id="new-task-modal" class="task-modal">
             <div class="task-modal-content">
               <form id="new-task-form">
-                <button type="button" id="close-task-form">&times;</button>
-                New Task
+                <div class="new-task-header"> New Task
+                  <button type="button" id="close-task-form-button">&times;</button>
+                </div>
                 <ul>
-                  <li>
-                    <label for="Task title">Title:</label>
-                    <input
-                      type="text"
-                      id="task-title"
-                      name="task-title"
-                      minlength="1"
-                      required
-                    />
-                  </li>
-                  <li>
-                    <label for="Description">Description:</label>
-                    <textarea
-                      type="text"
-                      id="description"
-                      name="description"
-                      minlength="1"
-                      required
-                    ></textarea>
-                  </li>
-                  <li>
-                    <label for="Priority">Priority:</label>
-                      <select name="priority" id="priority">
-                        <option value="Low" selected="selected">Low</option>
-                        <option value="Medium">Medium</option>
-                        <option value="High">High</option>
-                     </select>
-                  </li>
-                  <li>
-                    <label for="Due date">Due date:</label>
-                  <input 
-                  type="date" 
-                  id="due-date" 
-                  name="due-date"
-                  required 
-                  >
-                  </li>
-                  <li>
-                    <label for="Project">Project:</label>
-                    <select name="Project" id="project-drop-down">
-                    </select>
-                  </li>
+                  <div class="task-form-inputs">
+                    <div class="left-side-task-form">
+                      <li>
+                       <label for="Task title">Title:</label>
+                        <input
+                          type="text"
+                          id="task-title"
+                          name="task-title"
+                          minlength="1"
+                          required
+                        />
+                      </li>
+                      <li>
+                        <label for="Description">Description:</label>
+                        <textarea
+                          type="text"
+                          id="description"
+                          name="description"
+                          minlength="1"
+                          required
+                        ></textarea>
+                      </li>
+                    </div>
+                    <div class="right-side-task-form">
+                      <li>
+                        <label for="Priority">Priority:</label>
+                          <select name="priority" id="priority">
+                            <option value="Low" selected="selected">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                      </li>
+                      <li>
+                        <label for="Due date">Due Date:</label>
+                      <input 
+                      type="date" 
+                      id="due-date" 
+                      name="due-date"
+                      required 
+                      >
+                      </li>
+                      <li>
+                        <label for="Project">Project:</label>
+                        <select name="Project" id="project-drop-down">
+                        </select>
+                      </li>
+                    </div>
+                  </div>
                   <li class="button">
                     <label for="Submit new task"></label>
                     <button id="submit-task-button" type="submit">Submit</button>
