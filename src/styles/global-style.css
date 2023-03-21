@@ -61,7 +61,8 @@ h1 {
 }
 
 .sidebar-buttons,
-#add-project-button {
+#add-project-button,
+#add-task-button {
   text-align: start;
   font-size: 15px;
   padding: 5px 10px 5px 10px;
@@ -97,13 +98,9 @@ h1 {
   background-color: #fca5a5;
 }
 
-.project-buttons:hover {
-  background-color: #e67d7dad;
-}
-
-#add-project-button:hover {
-  color: var(--quaternary-page-color);
-  font-weight: bold;
+#add-project-button:hover,
+#add-task-button:hover {
+  background-color: #fca5a5;
 }
 
 .sidebar-icons {
@@ -153,22 +150,27 @@ h1 {
   margin: 0px;
   padding: 0px 20px 0px 20px;
 }
-.new-project-header {
+
+.new-project-header,
+.new-task-header {
   padding: 15px 10px 15px 10px;
   display: flex;
   justify-content: space-between;
   font-size: 20px;
   font-weight: bold;
   border-bottom: solid 1px black;
+  margin-bottom: 10px;
 }
 
-#close-project-form-button {
+#close-project-form-button,
+#close-task-form-button {
   font-size: 20px;
   font-weight: bold;
   color: #a1a1aa;
 }
 
-#close-project-form-button:hover {
+#close-project-form-button:hover,
+#close-task-form-button:hover {
   color: var(--quaternary-page-color);
 }
 
@@ -178,21 +180,29 @@ input {
   flex-direction: column;
 }
 
+label {
+  margin-bottom: 10px;
+}
+
 #project-name {
   width: 95%;
   padding: 10px;
   border-radius: 5px;
   border: solid 1px black;
-  margin-top: 10px;
 }
 
-input:focus {
+input:focus,
+#description:focus,
+#priority:focus,
+#due-date:focus,
+#project-drop-down:focus {
   outline: none !important;
   border: solid 2px var(--primary-page-color);
   box-shadow: 0 0 10px var(--primary-page-color);
 }
 
-#submit-project-button {
+#submit-project-button,
+#submit-task-button {
   padding: 10px 20px 10px 20px;
   background-color: #6ee7b7;
   border-radius: 5px;
@@ -209,6 +219,44 @@ input:focus {
   flex-direction: column;
 }
 
+#add-task-button {
+  font-size: 17px;
+  width: 100px;
+}
+
+.task-modal-content ul {
+  padding: 0px 20px 0px 20px;
+}
+
+.task-form-inputs {
+  display: flex;
+  gap: 15px;
+}
+
+.left-side-task-form,
+.right-side-task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+#task-title {
+  width: 210px;
+}
+
+#description {
+  height: 125px;
+  width: 210px;
+  resize: none;
+}
+
+#priority,
+#due-date,
+#project-drop-down {
+  width: 210px;
+}
+
 #dynamic-tasks-container {
   padding: 20px;
 }
@@ -219,10 +267,17 @@ input:focus {
   text-align: center;
 }
 
+.task-modal-content {
+  width: 500px;
+  height: 350px;
+}
+
 .task-nav {
   display: flex;
   justify-content: space-between;
-  border: 1px solid yellow;
+  border: 1px solid #fca5a5;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .task-content {

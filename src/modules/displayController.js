@@ -9,7 +9,7 @@ const displayController = (() => {
     'close-project-form-button'
   );
   const taskModal = document.getElementById('new-task-modal');
-  const closeTaskFormBtn = document.getElementById('close-task-form');
+  const closeTaskFormBtn = document.getElementById('close-task-form-button');
   const newProjectButton = document.getElementById('add-project-button');
   const newTaskButton = document.getElementById('add-task-button');
   const projectTitle = document.getElementById('project-title');
