@@ -134,7 +134,6 @@ const appController = (() => {
 
   dynamicTasksContainer.addEventListener('click', (e) => {
     const targetElement = e.target.id;
-    console.log(`target element: ${targetElement}`);
     if (targetElement.includes('delete')) {
       deleteTask(e);
     } else if (targetElement.includes('edit')) {

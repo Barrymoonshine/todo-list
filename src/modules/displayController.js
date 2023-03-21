@@ -70,16 +70,17 @@ const displayController = (() => {
     projectDropDown.innerHTML = '';
   };
 
-  // const stylePriorityButton = () => {
-  //   let { priority } = tasksHolder.myTasks[getIndexPosition(e)];
-  //   if (priority === 'Low') {
-  //     priority = 'Medium';
-  //   } else if (priority === 'Medium') {
-  //     priority = 'High';
-  //   } else if (priority === 'High') {
-  //     priority = 'Low';
-  //   }
-  // };
+  const stylePriorityButton = (item, index) => {
+    console.log('stylePriorityButton invoked');
+    const priorityButton = document.getElementById(`priority-${index}`);
+    if (item.priority === 'Low') {
+      priorityButton.style.backgroundColor = '#6ee7b7';
+    } else if (item.priority === 'Medium') {
+      priorityButton.style.backgroundColor = '#fdba74';
+    } else if (item.priority === 'High') {
+      priorityButton.style.backgroundColor = '#fca5a5';
+    }
+  };
 
   const removeTasks = () => {
     while (dynamicTasksContainer.firstChild) {
@@ -107,7 +108,7 @@ const displayController = (() => {
       />
       <div class="task-title">Title: ${item.title}</div>
       <button><img id="edit-${index}" class="task-nav-icons" src="../src/assets/images/edit.png" alt="Edit"></button>
-      <button id="priority-${index}">${item.priority}</button>
+      <button class="priority-buttons" id="priority-${index}">${item.priority}</button>
       <button><img id="delete-${index}" class="task-nav-icons" src="../src/assets/images/delete.png" alt="Delete"></button>
       <button><img id="expand-${index}" class="task-nav-icons" src="../src/assets/images/expand.png" alt="Expand"></button>
     </div>  
@@ -123,6 +124,7 @@ const displayController = (() => {
     </div>
   `;
     displayOpenTask(item, index);
+    stylePriorityButton(item, index);
   };
 
   const identifyProjectTasks = (targetProjectName) => {
