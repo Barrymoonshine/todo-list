@@ -49,7 +49,7 @@ h1 {
   align-items: flex-start;
   flex-direction: column;
   background-color: var(--secondary-page-color);
-  width: 250px;
+  min-width: 250px;
 }
 
 .sidebar ul {
@@ -276,6 +276,7 @@ input:focus,
 .task-nav {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border: 1px solid #fca5a5;
   padding: 10px;
   border-radius: 5px;
