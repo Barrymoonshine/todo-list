@@ -41,17 +41,36 @@ const appController = (() => {
     });
   };
 
-  const checkForLocalStorage = () => {
-    const storedTasks = JSON.parse(localStorage.getItem('myTasks'));
-    if (storedTasks === null) {
-    } else {
-      addStoredTasks(storedTasks);
-      displayController.displayProjectName('My Tasks');
-      displayController.handleTasksDisplay('My Tasks');
-    }
+  const addStoredProjects = (storedProjects) => {
+    storedProjects.forEach((item) => {
+      if (item !== 'My Tasks') {
+        dataHolder.myProjects.push(item);
+      }
+    });
   };
 
-  const saveToLocalStorage = () => {
+  const checkForLocalStorage = () => {
+    const storedTasks = JSON.parse(localStorage.getItem('myTasks'));
+    const storedProjects = JSON.parse(localStorage.getItem('myProjects'));
+    if (storedTasks === null && storedProjects === null) {
+    } else if (storedTasks === null && storedProjects !== null) {
+      addStoredProjects(storedProjects);
+    } else if (storedTasks !== null && storedProjects === null) {
+      addStoredTasks(storedTasks);
+    } else {
+      addStoredProjects(storedProjects);
+      addStoredTasks(storedTasks);
+    }
+    displayController.displayProjects();
+    displayController.displayProjectName('My Tasks');
+    displayController.handleTasksDisplay('My Tasks');
+  };
+
+  const saveProjectToLocalStorage = () => {
+    localStorage.setItem('myProjects', JSON.stringify(dataHolder.myProjects));
+  };
+
+  const saveTaskToLocalStorage = () => {
     localStorage.setItem('myTasks', JSON.stringify(dataHolder.myTasks));
   };
 
@@ -80,13 +99,14 @@ const appController = (() => {
   };
 
   const addProject = () => {
-    const projectName = formValueProvider.getProjectName();
+    const projectName = formValueProvider.getProjectFormName();
     dataHolder.myProjects.push(projectName);
   };
 
   const handleProjectForm = (e) => {
     e.preventDefault();
     addProject();
+    saveProjectToLocalStorage();
     displayController.displayProjects();
     displayController.hideModals();
     displayController.clearForms();
@@ -95,7 +115,7 @@ const appController = (() => {
   const handleTaskForm = (e) => {
     e.preventDefault();
     addTask();
-    saveToLocalStorage();
+    saveTaskToLocalStorage();
     displayController.displayProjectName(displayController.getCurrentProject());
     displayController.handleTasksDisplay(displayController.getCurrentProject());
     displayController.hideModals();

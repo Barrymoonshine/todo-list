@@ -1,5 +1,5 @@
 const formValueProvider = (() => {
-  const getProjectName = () => {
+  const getProjectFormName = () => {
     const projectName = document.getElementById('project-name').value;
     // If no project name has been provided by the user on the tasks form
     // This function returns the default project: My Tasks
@@ -25,7 +25,7 @@ const formValueProvider = (() => {
   };
 
   return {
-    getProjectName,
+    getProjectFormName,
     getTaskFormValues,
   };
 })();
