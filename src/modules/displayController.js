@@ -71,7 +71,6 @@ const displayController = (() => {
   };
 
   const stylePriorityButton = (item, index) => {
-    console.log('stylePriorityButton invoked');
     const priorityButton = document.getElementById(`priority-${index}`);
     if (item.priority === 'Low') {
       priorityButton.style.backgroundColor = '#6ee7b7';

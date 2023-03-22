@@ -27,6 +27,34 @@ const appController = (() => {
     open,
   });
 
+  const addStoredTasks = (storedTasks) => {
+    storedTasks.forEach((item) => {
+      const newTask = TasksFactory(
+        item.project,
+        item.title,
+        item.description,
+        item.priority,
+        item.dueDate,
+        item.open
+      );
+      dataHolder.myTasks.push(newTask);
+    });
+  };
+
+  const checkForLocalStorage = () => {
+    const storedTasks = JSON.parse(localStorage.getItem('myTasks'));
+    if (storedTasks === null) {
+    } else {
+      addStoredTasks(storedTasks);
+      displayController.displayProjectName('My Tasks');
+      displayController.handleTasksDisplay('My Tasks');
+    }
+  };
+
+  const saveToLocalStorage = () => {
+    localStorage.setItem('myTasks', JSON.stringify(dataHolder.myTasks));
+  };
+
   const addTask = () => {
     const project = formValueProvider.getTaskFormValues().projectValue;
     const title = formValueProvider.getTaskFormValues().titleValue;
@@ -67,6 +95,7 @@ const appController = (() => {
   const handleTaskForm = (e) => {
     e.preventDefault();
     addTask();
+    saveToLocalStorage();
     displayController.displayProjectName(displayController.getCurrentProject());
     displayController.handleTasksDisplay(displayController.getCurrentProject());
     displayController.hideModals();
@@ -147,7 +176,7 @@ const appController = (() => {
     }
   });
 
-  return {};
+  return { checkForLocalStorage };
 })();
 
 export default appController;
