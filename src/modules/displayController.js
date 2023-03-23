@@ -1,4 +1,6 @@
-import { addMonths, isBefore, parseISO, addYears } from 'date-fns';
+import {
+  addMonths, isBefore, parseISO, addYears,
+} from 'date-fns';
 import formValueProvider from './formValueProvider.js';
 import dataHolder from './dataHolder.js';
 
@@ -6,7 +8,7 @@ const displayController = (() => {
   const pageContainer = document.getElementById('page-container');
   const projectModal = document.getElementById('new-project-modal');
   const closeProjectFormBtn = document.getElementById(
-    'close-project-form-button'
+    'close-project-form-button',
   );
   const taskModal = document.getElementById('new-task-modal');
   const closeTaskFormBtn = document.getElementById('close-task-form-button');
@@ -14,10 +16,10 @@ const displayController = (() => {
   const newTaskButton = document.getElementById('add-task-button');
   const projectTitle = document.getElementById('project-title');
   const dynamicProjectContainer = document.getElementById(
-    'dynamic-project-container'
+    'dynamic-project-container',
   );
   const dynamicTasksContainer = document.getElementById(
-    'dynamic-tasks-container'
+    'dynamic-tasks-container',
   );
   const projectDropDown = document.getElementById('project-drop-down');
   const sideBarNav = document.getElementById('side-bar-nav');
@@ -235,6 +237,12 @@ const displayController = (() => {
     return currentProject;
   };
 
+  const displayPageOnLoad = () => {
+    displayProjects();
+    displayProjectName('My Tasks');
+    handleTasksDisplay('My Tasks');
+  };
+
   sideBarNav.addEventListener('click', (e) => {
     const element = e.target.id;
     const target = e.target.textContent;
@@ -280,6 +288,7 @@ const displayController = (() => {
     handleTasksDisplay,
     toggleTaskView,
     getCurrentProject,
+    displayPageOnLoad,
   };
 })();
 

@@ -49,11 +49,8 @@ const appController = (() => {
     });
   };
 
-  const checkForLocalStorage = () => {
-    const storedTasks = JSON.parse(localStorage.getItem('myTasks'));
-    const storedProjects = JSON.parse(localStorage.getItem('myProjects'));
-    if (storedTasks === null && storedProjects === null) {
-    } else if (storedTasks === null && storedProjects !== null) {
+  const handleLocalStorage = (storedTasks, storedProjects) => {
+    if (storedTasks === null && storedProjects !== null) {
       addStoredProjects(storedProjects);
     } else if (storedTasks !== null && storedProjects === null) {
       addStoredTasks(storedTasks);
@@ -61,9 +58,16 @@ const appController = (() => {
       addStoredProjects(storedProjects);
       addStoredTasks(storedTasks);
     }
-    displayController.displayProjects();
-    displayController.displayProjectName('My Tasks');
-    displayController.handleTasksDisplay('My Tasks');
+  };
+
+  const checkForLocalStorage = () => {
+    const storedTasks = JSON.parse(localStorage.getItem('myTasks'));
+    const storedProjects = JSON.parse(localStorage.getItem('myProjects'));
+    if (storedTasks === null && storedProjects === null) {
+    } else {
+      handleLocalStorage(storedTasks, storedProjects);
+      displayController.displayPageOnLoad();
+    }
   };
 
   const saveProjectsToLocalStorage = () => {
