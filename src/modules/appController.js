@@ -74,7 +74,7 @@ const appController = (() => {
     localStorage.setItem('myTasks', JSON.stringify(dataHolder.myTasks));
   };
 
-  const addTask = () => {
+  const createTask = () => {
     const project = formValueProvider.getTaskFormValues().projectValue;
     const title = formValueProvider.getTaskFormValues().titleValue;
     const description = formValueProvider.getTaskFormValues().descriptionValue;
@@ -89,6 +89,10 @@ const appController = (() => {
       dueDate,
       open
     );
+    return newTask;
+  };
+
+  const applyTaskMode = (newTask) => {
     if (editMode === false) {
       dataHolder.myTasks.push(newTask);
     } else if (editMode === true) {
@@ -114,7 +118,8 @@ const appController = (() => {
 
   const handleTaskForm = (e) => {
     e.preventDefault();
-    addTask();
+    const newTask = createTask();
+    applyTaskMode(newTask);
     saveTaskToLocalStorage();
     displayController.displayProjectName(displayController.getCurrentProject());
     displayController.handleTasksDisplay(displayController.getCurrentProject());
@@ -163,7 +168,6 @@ const appController = (() => {
     } else if (targetTask.priority === 'High') {
       targetTask.priority = 'Low';
     }
-    // displayController.stylePriorityButton();
     displayController.handleTasksDisplay(displayController.getCurrentProject());
   };
 
