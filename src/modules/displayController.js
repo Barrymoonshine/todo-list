@@ -110,10 +110,10 @@ const displayController = (() => {
       id="task-complete-${index}"
       />
       <div class="task-title">Title: ${item.title}</div>
-      <button><img id="edit-${index}" class="task-nav-icons" src="../src/assets/images/edit.png" alt="Edit"></button>
+      <button><img id="edit-${index}" class="task-nav-icons" src="./images/edit.png" alt="Edit"></button>
       <button class="priority-buttons" id="priority-${index}">${item.priority}</button>
-      <button><img id="delete-${index}" class="task-nav-icons" src="../src/assets/images/delete.png" alt="Delete"></button>
-      <button><img id="expand-${index}" class="task-nav-icons" src="../src/assets/images/expand.png" alt="Expand"></button>
+      <button><img id="delete-${index}" class="task-nav-icons" src="./images/delete.png" alt="Delete"></button>
+      <button><img id="expand-${index}" class="task-nav-icons" src="./images/expand.png" alt="Expand"></button>
     </div>  
     <div class="task-content" id="task-content-${index}">
       <div class="task-left-content">
