@@ -113,18 +113,22 @@ const appController = (() => {
     }
   };
 
-  const addProject = () => {
-    const projectName = formValueProvider.getProjectFormName();
-    dataHolder.myProjects.push(projectName);
+  const addProject = (newProject) => {
+    dataHolder.myProjects.push(newProject);
   };
 
   const handleProjectForm = (e) => {
     e.preventDefault();
-    addProject();
-    saveProjectsToLocalStorage();
-    displayController.displayProjects();
-    displayController.hideModals();
-    displayController.clearForms();
+    const newProject = formValueProvider.getProjectFormName();
+    if (dataHolder.myProjects.includes(newProject)) {
+      displayController.displaySameProjectNameWarning();
+    } else {
+      addProject(newProject);
+      saveProjectsToLocalStorage();
+      displayController.displayProjects();
+      displayController.hideModals();
+      displayController.clearForms();
+    }
   };
 
   const handleTaskForm = (e) => {

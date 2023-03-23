@@ -21,6 +21,7 @@ const displayController = (() => {
   );
   const projectDropDown = document.getElementById('project-drop-down');
   const sideBarNav = document.getElementById('side-bar-nav');
+  const projectNameInput = document.getElementById('project-name');
 
   const hideModals = () => {
     projectModal.style.display = 'none';
@@ -240,6 +241,20 @@ const displayController = (() => {
     handleTasksDisplay('My Tasks');
   };
 
+  const displaySameProjectNameWarning = () => {
+    projectNameInput.style.border = 'solid 2px  #9f1239';
+    projectWarningMessage.style.visibility = 'visible';
+  };
+
+  const hideProjectWarning = () => {
+    projectNameInput.style.border = 'solid 1px  black';
+    projectWarningMessage.style.visibility = 'hidden';
+  };
+
+  projectNameInput.addEventListener('click', () => {
+    hideProjectWarning();
+  });
+
   sideBarNav.addEventListener('click', (e) => {
     const element = e.target.id;
     const target = e.target.textContent;
@@ -247,6 +262,7 @@ const displayController = (() => {
       displayProjectName(target);
       handleTasksDisplay(target);
     } else {
+      // Do nothing as the user hasn't pressed a button
     }
   });
 
@@ -287,6 +303,7 @@ const displayController = (() => {
     displayProjectDropDown,
     getCurrentProject,
     displayPageOnLoad,
+    displaySameProjectNameWarning,
   };
 })();
 
