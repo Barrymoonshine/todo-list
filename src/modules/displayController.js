@@ -12,7 +12,7 @@ const displayController = (() => {
   const closeTaskFormBtn = document.getElementById('close-task-form-button');
   const newProjectButton = document.getElementById('add-project-button');
   const newTaskButton = document.getElementById('add-task-button');
-  const projectTitle = document.getElementById('project-title');
+  const dynamicTasksTitle = document.getElementById('dynamic-tasks-title');
   const dynamicProjectContainer = document.getElementById(
     'dynamic-project-container'
   );
@@ -22,6 +22,9 @@ const displayController = (() => {
   const projectDropDown = document.getElementById('project-drop-down');
   const sideBarNav = document.getElementById('side-bar-nav');
   const projectNameInput = document.getElementById('project-name');
+  const projectWarningMessage = document.getElementById(
+    'project-warning-message'
+  );
 
   const hideModals = () => {
     projectModal.style.display = 'none';
@@ -54,7 +57,7 @@ const displayController = (() => {
   };
 
   const displayProjectName = (target) => {
-    projectTitle.innerHTML = String.raw`${target}`;
+    dynamicTasksTitle.innerHTML = String.raw`${target}`;
   };
 
   const clearForms = () => {
@@ -185,7 +188,7 @@ const displayController = (() => {
   };
 
   const handleTasksDisplay = (target) => {
-    // Identifies whether the user has selected a sidebar nav button to display tasks
+    // Identifies whether the user has targeted a sidebar nav button to display tasks
     // or a project
     removeTasks();
     if (target === 'All Tasks') {
@@ -218,7 +221,7 @@ const displayController = (() => {
 
   const displayProjectDropDown = (currentProject) => {
     dataHolder.myProjects.forEach((item) => {
-      if (item === projectTitle.textContent || item === currentProject) {
+      if (item === dynamicTasksTitle.textContent || item === currentProject) {
         projectDropDown.innerHTML += String.raw`
           <option value="${item}" selected="selected">${item}</option>
       `;
@@ -231,7 +234,7 @@ const displayController = (() => {
   };
 
   const getCurrentProject = () => {
-    const currentProject = projectTitle.textContent;
+    const currentProject = dynamicTasksTitle.textContent;
     return currentProject;
   };
 

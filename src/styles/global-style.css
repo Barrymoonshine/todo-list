@@ -83,7 +83,7 @@ h1 {
   margin-bottom: 10px;
 }
 
-#projectWarningMessage {
+#project-warning-message {
   visibility: hidden;
   color: var(--quaternary-page-color);
   position: absolute;
@@ -268,7 +268,7 @@ input:focus,
   padding: 20px;
 }
 
-#project-title {
+#dynamic-tasks-title {
   font-size: 40px;
   font-style: bold;
   text-align: center;

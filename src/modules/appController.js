@@ -65,7 +65,7 @@ const appController = (() => {
     const storedTasks = JSON.parse(localStorage.getItem('myTasks'));
     const storedProjects = JSON.parse(localStorage.getItem('myProjects'));
     if (storedTasks === null && storedProjects === null) {
-      // No local storage, do nothing
+      // No local storage present, do nothing
     } else {
       handleLocalStorage(storedTasks, storedProjects);
       displayController.displayPageOnLoad();
