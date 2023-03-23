@@ -9,7 +9,7 @@ const appController = (() => {
     'dynamic-tasks-container'
   );
   let editModeActive = false;
-  let index = '';
+  let editTaskIndexPosition = '';
 
   const TasksFactory = (
     project,
@@ -107,9 +107,9 @@ const appController = (() => {
     if (editModeActive === false) {
       dataHolder.myTasks.push(newTask);
     } else if (editModeActive === true) {
-      dataHolder.myTasks.splice(index, 1, newTask);
+      dataHolder.myTasks.splice(editTaskIndexPosition, 1, newTask);
       editModeActive = false;
-      index = '';
+      editTaskIndexPosition = '';
     }
   };
 
@@ -148,10 +148,12 @@ const appController = (() => {
     const descriptionValue = document.getElementById('description');
     const priorityValue = document.getElementById('priority');
     const dueDateValue = document.getElementById('due-date');
+    const currentProject = dataHolder.myTasks[indexPosition].project;
     titleValue.value = dataHolder.myTasks[indexPosition].title;
     descriptionValue.value = dataHolder.myTasks[indexPosition].description;
     priorityValue.value = dataHolder.myTasks[indexPosition].priority;
     dueDateValue.value = dataHolder.myTasks[indexPosition].dueDate;
+    displayController.displayProjectDropDown(currentProject);
   };
 
   const deleteTask = (e) => {
@@ -164,7 +166,7 @@ const appController = (() => {
     addTaskToForm(getIndexPosition(e));
     displayController.displayTaskModal(displayController.getCurrentProject());
     editModeActive = true;
-    index = getIndexPosition(e);
+    editTaskIndexPosition = getIndexPosition(e);
   };
 
   const toggleTaskDetails = (e) => {
