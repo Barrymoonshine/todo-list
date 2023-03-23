@@ -66,11 +66,16 @@ const appController = (() => {
     displayController.handleTasksDisplay('My Tasks');
   };
 
-  const saveProjectToLocalStorage = () => {
+  const saveProjectsToLocalStorage = () => {
     localStorage.setItem('myProjects', JSON.stringify(dataHolder.myProjects));
   };
 
-  const saveTaskToLocalStorage = () => {
+  const clearTasksFromLocalStorage = () => {
+    localStorage.removeItem('myTasks');
+  };
+
+  const refreshTasksLocalStorage = () => {
+    clearTasksFromLocalStorage();
     localStorage.setItem('myTasks', JSON.stringify(dataHolder.myTasks));
   };
 
@@ -110,7 +115,7 @@ const appController = (() => {
   const handleProjectForm = (e) => {
     e.preventDefault();
     addProject();
-    saveProjectToLocalStorage();
+    saveProjectsToLocalStorage();
     displayController.displayProjects();
     displayController.hideModals();
     displayController.clearForms();
@@ -120,7 +125,7 @@ const appController = (() => {
     e.preventDefault();
     const newTask = createTask();
     applyTaskMode(newTask);
-    saveTaskToLocalStorage();
+    refreshTasksLocalStorage();
     displayController.displayProjectName(displayController.getCurrentProject());
     displayController.handleTasksDisplay(displayController.getCurrentProject());
     displayController.hideModals();
@@ -146,6 +151,7 @@ const appController = (() => {
   const deleteTask = (e) => {
     dataHolder.myTasks.splice(getIndexPosition(e), 1);
     displayController.handleTasksDisplay(displayController.getCurrentProject());
+    refreshTasksLocalStorage();
   };
 
   const editTask = (e) => {
@@ -169,6 +175,7 @@ const appController = (() => {
       targetTask.priority = 'Low';
     }
     displayController.handleTasksDisplay(displayController.getCurrentProject());
+    refreshTasksLocalStorage();
   };
 
   const completeTask = (e) => {
