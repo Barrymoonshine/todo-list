@@ -8,7 +8,7 @@ const appController = (() => {
   const dynamicTasksContainer = document.getElementById(
     'dynamic-tasks-container'
   );
-  let editMode = false;
+  let editModeActive = false;
   let index = '';
 
   const TasksFactory = (
@@ -42,6 +42,7 @@ const appController = (() => {
   };
 
   const addStoredProjects = (storedProjects) => {
+    // Adds all the stored projects other than the default project to avoid duplication
     storedProjects.forEach((item) => {
       if (item !== 'My Tasks') {
         dataHolder.myProjects.push(item);
@@ -64,6 +65,7 @@ const appController = (() => {
     const storedTasks = JSON.parse(localStorage.getItem('myTasks'));
     const storedProjects = JSON.parse(localStorage.getItem('myProjects'));
     if (storedTasks === null && storedProjects === null) {
+      // No local storage, do nothing
     } else {
       handleLocalStorage(storedTasks, storedProjects);
       displayController.displayPageOnLoad();
@@ -102,11 +104,11 @@ const appController = (() => {
   };
 
   const applyTaskMode = (newTask) => {
-    if (editMode === false) {
+    if (editModeActive === false) {
       dataHolder.myTasks.push(newTask);
-    } else if (editMode === true) {
+    } else if (editModeActive === true) {
       dataHolder.myTasks.splice(index, 1, newTask);
-      editMode = false;
+      editModeActive = false;
       index = '';
     }
   };
@@ -161,7 +163,7 @@ const appController = (() => {
   const editTask = (e) => {
     addTaskToForm(getIndexPosition(e));
     displayController.displayTaskModal(displayController.getCurrentProject());
-    editMode = true;
+    editModeActive = true;
     index = getIndexPosition(e);
   };
 
