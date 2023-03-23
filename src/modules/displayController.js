@@ -209,7 +209,6 @@ const displayController = (() => {
   const toggleTaskView = (index) => {
     const task = dataHolder.myTasks[index];
     const targetContent = document.getElementById(`task-content-${index}`);
-    const targetButton = document.getElementById(`expand-${index}`);
     if (task.open === false) {
       targetContent.style.display = 'flex';
       task.open = true;
