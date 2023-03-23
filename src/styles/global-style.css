@@ -100,7 +100,7 @@ h1 {
 
 #project-warning-message {
   visibility: hidden;
-  color: var(--page-off-white);
+  color: var(--page-dark-red);
   position: absolute;
 }
 
@@ -122,6 +122,11 @@ h1 {
   font-weight: bold;
   margin-bottom: 5px;
   border: 1px solid var(--page-grey);
+  width: 210px;
+}
+
+#add-project-button {
+  width: 210px;
 }
 
 .project-buttons:hover {
