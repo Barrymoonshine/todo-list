@@ -2,7 +2,7 @@
 
 [Live demo](https://barrymoonshine.github.io/todo-list/)
 
-![Model](https://github.com/Barrymoonshine/tic-tac-toe/blob/dist/images/todo-list-screenshot.png?raw=true)
+![Model](https://github.com/Barrymoonshine/todo-list/blob/main/dist/images/todo-list-screenshot.png?raw=true)
 
 ## Summary
 
