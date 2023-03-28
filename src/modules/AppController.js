@@ -1,7 +1,7 @@
 import DisplayController from './DisplayController.js';
 import FormValueProvider from './FormValueProvider.js';
 import DataHolder from './DataHolder.js';
-import LocalStorageController from './modules/LocalStorageController.js';
+import LocalStorageController from './LocalStorageController.js';
 
 const AppController = (() => {
   const submitNewProjectForm = document.getElementById('new-project-form');
@@ -161,6 +161,7 @@ const AppController = (() => {
       completeTask(e);
     }
   });
+  return { TasksFactory };
 })();
 
 export default AppController;
