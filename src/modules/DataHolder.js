@@ -24,6 +24,9 @@ const DataHolder = (() => {
   const getProjects = () => myProjects;
 
   const date = new Date().toJSON();
+
+  const getDate = () => date.slice(0, 10);
+
   return {
     addNewTask,
     getTasks,
@@ -31,7 +34,7 @@ const DataHolder = (() => {
     editTask,
     addNewProject,
     getProjects,
-    date,
+    getDate,
   };
 })();
 

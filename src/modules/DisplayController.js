@@ -152,7 +152,7 @@ const DisplayController = (() => {
   };
 
   const getCurrentDate = () => {
-    const currentDate = DataHolder.date.slice(0, 10);
+    const currentDate = DataHolder.getDate();
     return currentDate;
   };
 
