@@ -40,7 +40,7 @@ const DisplayController = (() => {
       dynamicProjectContainer.removeChild(dynamicProjectContainer.firstChild);
     }
     // Add back all projects, including new project
-    DataHolder.myProjects.forEach((item, index) => {
+    DataHolder.getProjects().forEach((item, index) => {
       dynamicProjectContainer.innerHTML += String.raw`
     <button id='project-button-${index}' class="project-buttons">${item}</button>
   `;
@@ -205,7 +205,7 @@ const DisplayController = (() => {
   };
 
   const toggleTaskView = (index) => {
-    const task = DataHolder.myTasks[index];
+    const task = DataHolder.getTasks()[index];
     const targetContent = document.getElementById(`task-content-${index}`);
     if (task.open === false) {
       targetContent.style.display = 'flex';
@@ -217,7 +217,7 @@ const DisplayController = (() => {
   };
 
   const displayProjectDropDown = (currentProject) => {
-    DataHolder.myProjects.forEach((item) => {
+    DataHolder.getProjects().forEach((item) => {
       if (item === dynamicTasksTitle.textContent || item === currentProject) {
         projectDropDown.innerHTML += String.raw`
           <option value="${item}" selected="selected">${item}</option>

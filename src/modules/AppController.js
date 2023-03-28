@@ -45,7 +45,7 @@ const AppController = (() => {
     // Adds all the stored projects other than the default project to avoid duplication
     storedProjects.forEach((item) => {
       if (item !== 'My Tasks') {
-        DataHolder.myProjects.push(item);
+        DataHolder.addNewProject(item);
       }
     });
   };
@@ -73,7 +73,10 @@ const AppController = (() => {
   };
 
   const saveProjectsToLocalStorage = () => {
-    localStorage.setItem('myProjects', JSON.stringify(DataHolder.myProjects));
+    localStorage.setItem(
+      'myProjects',
+      JSON.stringify(DataHolder.getProjects())
+    );
   };
 
   const clearTasksFromLocalStorage = () => {
@@ -82,7 +85,7 @@ const AppController = (() => {
 
   const refreshTasksLocalStorage = () => {
     clearTasksFromLocalStorage();
-    localStorage.setItem('myTasks', JSON.stringify(DataHolder.myTasks));
+    localStorage.setItem('myTasks', JSON.stringify(DataHolder.getTasks()));
   };
 
   const createTask = () => {
@@ -114,13 +117,13 @@ const AppController = (() => {
   };
 
   const addProject = (newProject) => {
-    DataHolder.myProjects.push(newProject);
+    DataHolder.addNewProject(newProject);
   };
 
   const handleProjectForm = (e) => {
     e.preventDefault();
     const newProject = FormValueProvider.getProjectFormName();
-    if (DataHolder.myProjects.includes(newProject)) {
+    if (DataHolder.getProjects().includes(newProject)) {
       DisplayController.displaySameProjectNameWarning();
     } else {
       addProject(newProject);
@@ -152,11 +155,11 @@ const AppController = (() => {
     const descriptionValue = document.getElementById('description');
     const priorityValue = document.getElementById('priority');
     const dueDateValue = document.getElementById('due-date');
-    const currentProject = DataHolder.myTasks[indexPosition].project;
-    titleValue.value = DataHolder.myTasks[indexPosition].title;
-    descriptionValue.value = DataHolder.myTasks[indexPosition].description;
-    priorityValue.value = DataHolder.myTasks[indexPosition].priority;
-    dueDateValue.value = DataHolder.myTasks[indexPosition].dueDate;
+    const currentProject = DataHolder.getTasks()[indexPosition].project;
+    titleValue.value = DataHolder.getTasks()[indexPosition].title;
+    descriptionValue.value = DataHolder.getTasks()[indexPosition].description;
+    priorityValue.value = DataHolder.getTasks()[indexPosition].priority;
+    dueDateValue.value = DataHolder.getTasks()[indexPosition].dueDate;
     DisplayController.displayProjectDropDown(currentProject);
   };
 
