@@ -1,8 +1,8 @@
 import './styles/global-style.css';
 import './styles/normalize.css';
-import appController from './modules/appController.js';
-import displayController from './modules/displayController.js';
-import formValueProvider from './modules/formValueProvider.js';
-import dataHolder from './modules/dataHolder.js';
+import AppController from './modules/AppController.js';
+import DisplayController from './modules/DisplayController.js';
+import FormValueProvider from './modules/FormValueProvider.js';
+import DataHolder from './modules/DataHolder.js';
 
-appController.checkForLocalStorage();
+AppController.checkForLocalStorage();

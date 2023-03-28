@@ -1,8 +1,8 @@
 import { addMonths, isBefore, parseISO, addYears } from 'date-fns';
-import formValueProvider from './formValueProvider.js';
-import dataHolder from './dataHolder.js';
+import FormValueProvider from './FormValueProvider.js';
+import DataHolder from './DataHolder.js';
 
-const displayController = (() => {
+const DisplayController = (() => {
   const pageContainer = document.getElementById('page-container');
   const projectModal = document.getElementById('new-project-modal');
   const closeProjectFormBtn = document.getElementById(
@@ -41,7 +41,7 @@ const displayController = (() => {
       dynamicProjectContainer.removeChild(dynamicProjectContainer.firstChild);
     }
     // Add back all projects, including new project
-    dataHolder.myProjects.forEach((item, index) => {
+    DataHolder.myProjects.forEach((item, index) => {
       dynamicProjectContainer.innerHTML += String.raw`
     <button id='project-button-${index}' class="project-buttons">${item}</button>
   `;
@@ -93,7 +93,6 @@ const displayController = (() => {
 
   const displayOpenTask = (item, index) => {
     const task = document.getElementById(`task-content-${index}`);
-    const targetButton = document.getElementById(`expand-${index}`);
     if (item.open === true) {
       task.style.display = 'flex';
     } else if (item.open === false) {
@@ -132,7 +131,7 @@ const displayController = (() => {
 
   const identifyProjectTasks = (targetProjectName) => {
     // Identifies the target projects tasks
-    dataHolder.myTasks.forEach((item, index) => {
+    DataHolder.myTasks.forEach((item, index) => {
       if (item.project === targetProjectName) {
         displayTask(item, index);
       }
@@ -140,13 +139,13 @@ const displayController = (() => {
   };
 
   const displayAllTasks = () => {
-    dataHolder.myTasks.forEach((item, index) => {
+    DataHolder.myTasks.forEach((item, index) => {
       displayTask(item, index);
     });
   };
 
   const identifyHighPriorityTasks = () => {
-    dataHolder.myTasks.forEach((item, index) => {
+    DataHolder.myTasks.forEach((item, index) => {
       if (item.priority === 'High') {
         displayTask(item, index);
       }
@@ -154,13 +153,13 @@ const displayController = (() => {
   };
 
   const getCurrentDate = () => {
-    const currentDate = dataHolder.date.slice(0, 10);
+    const currentDate = DataHolder.date.slice(0, 10);
     return currentDate;
   };
 
   const identifyTasksDueToday = () => {
     const currentDate = getCurrentDate();
-    dataHolder.myTasks.forEach((item, index) => {
+    DataHolder.myTasks.forEach((item, index) => {
       if (item.dueDate === currentDate) {
         displayTask(item, index);
       }
@@ -170,7 +169,7 @@ const displayController = (() => {
   const identifyTasksDueThisMonth = () => {
     const currentDate = getCurrentDate();
     const nextMonth = addMonths(parseISO(currentDate), 1);
-    dataHolder.myTasks.forEach((item, index) => {
+    DataHolder.myTasks.forEach((item, index) => {
       if (isBefore(parseISO(item.dueDate), nextMonth) === true) {
         displayTask(item, index);
       }
@@ -180,7 +179,7 @@ const displayController = (() => {
   const identifyTasksDueThisYear = () => {
     const currentDate = getCurrentDate();
     const nextYear = addYears(parseISO(currentDate), 1);
-    dataHolder.myTasks.forEach((item, index) => {
+    DataHolder.myTasks.forEach((item, index) => {
       if (isBefore(parseISO(item.dueDate), nextYear) === true) {
         displayTask(item, index);
       }
@@ -207,7 +206,7 @@ const displayController = (() => {
   };
 
   const toggleTaskView = (index) => {
-    const task = dataHolder.myTasks[index];
+    const task = DataHolder.myTasks[index];
     const targetContent = document.getElementById(`task-content-${index}`);
     if (task.open === false) {
       targetContent.style.display = 'flex';
@@ -219,7 +218,7 @@ const displayController = (() => {
   };
 
   const displayProjectDropDown = (currentProject) => {
-    dataHolder.myProjects.forEach((item) => {
+    DataHolder.myProjects.forEach((item) => {
       if (item === dynamicTasksTitle.textContent || item === currentProject) {
         projectDropDown.innerHTML += String.raw`
           <option value="${item}" selected="selected">${item}</option>
@@ -309,4 +308,4 @@ const displayController = (() => {
   };
 })();
 
-export default displayController;
+export default DisplayController;

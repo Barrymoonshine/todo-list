@@ -1,8 +1,8 @@
-import displayController from './displayController.js';
-import formValueProvider from './formValueProvider.js';
-import dataHolder from './dataHolder.js';
+import DisplayController from './DisplayController.js';
+import FormValueProvider from './FormValueProvider.js';
+import DataHolder from './DataHolder.js';
 
-const appController = (() => {
+const AppController = (() => {
   const submitNewProjectForm = document.getElementById('new-project-form');
   const submitNewTaskForm = document.getElementById('new-task-form');
   const dynamicTasksContainer = document.getElementById(
@@ -37,7 +37,7 @@ const appController = (() => {
         item.dueDate,
         item.open
       );
-      dataHolder.myTasks.push(newTask);
+      DataHolder.addNewTask(newTask);
     });
   };
 
@@ -45,7 +45,7 @@ const appController = (() => {
     // Adds all the stored projects other than the default project to avoid duplication
     storedProjects.forEach((item) => {
       if (item !== 'My Tasks') {
-        dataHolder.myProjects.push(item);
+        DataHolder.myProjects.push(item);
       }
     });
   };
@@ -68,12 +68,12 @@ const appController = (() => {
       // No local storage present, do nothing
     } else {
       handleLocalStorage(storedTasks, storedProjects);
-      displayController.displayPageOnLoad();
+      DisplayController.displayPageOnLoad();
     }
   };
 
   const saveProjectsToLocalStorage = () => {
-    localStorage.setItem('myProjects', JSON.stringify(dataHolder.myProjects));
+    localStorage.setItem('myProjects', JSON.stringify(DataHolder.myProjects));
   };
 
   const clearTasksFromLocalStorage = () => {
@@ -82,15 +82,15 @@ const appController = (() => {
 
   const refreshTasksLocalStorage = () => {
     clearTasksFromLocalStorage();
-    localStorage.setItem('myTasks', JSON.stringify(dataHolder.myTasks));
+    localStorage.setItem('myTasks', JSON.stringify(DataHolder.myTasks));
   };
 
   const createTask = () => {
-    const project = formValueProvider.getTaskFormValues().projectValue;
-    const title = formValueProvider.getTaskFormValues().titleValue;
-    const description = formValueProvider.getTaskFormValues().descriptionValue;
-    const priority = formValueProvider.getTaskFormValues().priorityValue;
-    const dueDate = formValueProvider.getTaskFormValues().dueDateValue;
+    const project = FormValueProvider.getTaskFormValues().projectValue;
+    const title = FormValueProvider.getTaskFormValues().titleValue;
+    const description = FormValueProvider.getTaskFormValues().descriptionValue;
+    const priority = FormValueProvider.getTaskFormValues().priorityValue;
+    const dueDate = FormValueProvider.getTaskFormValues().dueDateValue;
     const open = false;
     const newTask = TasksFactory(
       project,
@@ -105,29 +105,29 @@ const appController = (() => {
 
   const applyTaskMode = (newTask) => {
     if (editModeActive === false) {
-      dataHolder.myTasks.push(newTask);
+      DataHolder.addNewTask(newTask);
     } else if (editModeActive === true) {
-      dataHolder.myTasks.splice(editTaskIndexPosition, 1, newTask);
+      DataHolder.myTasks.splice(editTaskIndexPosition, 1, newTask);
       editModeActive = false;
       editTaskIndexPosition = '';
     }
   };
 
   const addProject = (newProject) => {
-    dataHolder.myProjects.push(newProject);
+    DataHolder.myProjects.push(newProject);
   };
 
   const handleProjectForm = (e) => {
     e.preventDefault();
-    const newProject = formValueProvider.getProjectFormName();
-    if (dataHolder.myProjects.includes(newProject)) {
-      displayController.displaySameProjectNameWarning();
+    const newProject = FormValueProvider.getProjectFormName();
+    if (DataHolder.myProjects.includes(newProject)) {
+      DisplayController.displaySameProjectNameWarning();
     } else {
       addProject(newProject);
       saveProjectsToLocalStorage();
-      displayController.displayProjects();
-      displayController.hideModals();
-      displayController.clearForms();
+      DisplayController.displayProjects();
+      DisplayController.hideModals();
+      DisplayController.clearForms();
     }
   };
 
@@ -136,10 +136,10 @@ const appController = (() => {
     const newTask = createTask();
     applyTaskMode(newTask);
     refreshTasksLocalStorage();
-    displayController.displayProjectName(displayController.getCurrentProject());
-    displayController.handleTasksDisplay(displayController.getCurrentProject());
-    displayController.hideModals();
-    displayController.clearForms();
+    DisplayController.displayProjectName(DisplayController.getCurrentProject());
+    DisplayController.handleTasksDisplay(DisplayController.getCurrentProject());
+    DisplayController.hideModals();
+    DisplayController.clearForms();
   };
 
   const getIndexPosition = (e) => {
@@ -152,33 +152,33 @@ const appController = (() => {
     const descriptionValue = document.getElementById('description');
     const priorityValue = document.getElementById('priority');
     const dueDateValue = document.getElementById('due-date');
-    const currentProject = dataHolder.myTasks[indexPosition].project;
-    titleValue.value = dataHolder.myTasks[indexPosition].title;
-    descriptionValue.value = dataHolder.myTasks[indexPosition].description;
-    priorityValue.value = dataHolder.myTasks[indexPosition].priority;
-    dueDateValue.value = dataHolder.myTasks[indexPosition].dueDate;
-    displayController.displayProjectDropDown(currentProject);
+    const currentProject = DataHolder.myTasks[indexPosition].project;
+    titleValue.value = DataHolder.myTasks[indexPosition].title;
+    descriptionValue.value = DataHolder.myTasks[indexPosition].description;
+    priorityValue.value = DataHolder.myTasks[indexPosition].priority;
+    dueDateValue.value = DataHolder.myTasks[indexPosition].dueDate;
+    DisplayController.displayProjectDropDown(currentProject);
   };
 
   const deleteTask = (e) => {
-    dataHolder.myTasks.splice(getIndexPosition(e), 1);
-    displayController.handleTasksDisplay(displayController.getCurrentProject());
+    DataHolder.myTasks.splice(getIndexPosition(e), 1);
+    DisplayController.handleTasksDisplay(DisplayController.getCurrentProject());
     refreshTasksLocalStorage();
   };
 
   const editTask = (e) => {
     addTaskToForm(getIndexPosition(e));
-    displayController.displayTaskModal(displayController.getCurrentProject());
+    DisplayController.displayTaskModal(DisplayController.getCurrentProject());
     editModeActive = true;
     editTaskIndexPosition = getIndexPosition(e);
   };
 
   const toggleTaskDetails = (e) => {
-    displayController.toggleTaskView(getIndexPosition(e));
+    DisplayController.toggleTaskView(getIndexPosition(e));
   };
 
   const togglePriority = (e) => {
-    const targetTask = dataHolder.myTasks[getIndexPosition(e)];
+    const targetTask = DataHolder.myTasks[getIndexPosition(e)];
     if (targetTask.priority === 'Low') {
       targetTask.priority = 'Medium';
     } else if (targetTask.priority === 'Medium') {
@@ -186,7 +186,7 @@ const appController = (() => {
     } else if (targetTask.priority === 'High') {
       targetTask.priority = 'Low';
     }
-    displayController.handleTasksDisplay(displayController.getCurrentProject());
+    DisplayController.handleTasksDisplay(DisplayController.getCurrentProject());
     refreshTasksLocalStorage();
   };
 
@@ -222,4 +222,4 @@ const appController = (() => {
   return { checkForLocalStorage };
 })();
 
-export default appController;
+export default AppController;

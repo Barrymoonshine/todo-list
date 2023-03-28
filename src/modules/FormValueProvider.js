@@ -1,4 +1,4 @@
-const formValueProvider = (() => {
+const FormValueProvider = (() => {
   const getProjectFormName = () => {
     const projectName = document.getElementById('project-name').value;
     return projectName;
@@ -25,4 +25,4 @@ const formValueProvider = (() => {
   };
 })();
 
-export default formValueProvider;
+export default FormValueProvider;
