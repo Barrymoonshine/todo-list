@@ -7,6 +7,10 @@ const DataHolder = (() => {
 
   const getTasks = () => myTasks;
 
+  const deleteTask = (index) => {
+    myTasks.splice(index, 1);
+  };
+
   const myProjects = ['My Tasks'];
 
   const addNewProject = (newProject) => {
@@ -19,6 +23,7 @@ const DataHolder = (() => {
   return {
     addNewTask,
     getTasks,
+    deleteTask,
     addNewProject,
     getProjects,
     myProjects,

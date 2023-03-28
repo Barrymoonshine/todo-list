@@ -164,7 +164,7 @@ const AppController = (() => {
   };
 
   const deleteTask = (e) => {
-    DataHolder.myTasks.splice(getIndexPosition(e), 1);
+    DataHolder.deleteTask(getIndexPosition(e));
     DisplayController.handleTasksDisplay(DisplayController.getCurrentProject());
     refreshTasksLocalStorage();
   };
