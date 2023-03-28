@@ -320,7 +320,8 @@ input:focus,
 }
 
 .task-nav {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
   justify-content: space-between;
   align-items: center;
   border: 1px solid var(--page-red);
@@ -336,6 +337,7 @@ input:focus,
 .priority-buttons {
   padding: 5px 20px 5px 20px;
   border-radius: 5px;
+  width: 100px;
 }
 
 #dynamic-tasks-container {
