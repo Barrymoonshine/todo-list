@@ -32,7 +32,7 @@ button {
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr 8fr;
-  grid-template-rows: 1fr 14fr;
+  grid-template-rows: 100px 14fr;
   font-family: 'Rubik', sans-serif;
 }
 
@@ -86,8 +86,12 @@ h1 {
   border-radius: 10px;
 }
 
+.sidebar-buttons {
+  border: 1px solid var(--page-grey);
+}
+
 .sidebar-buttons:hover {
-  background-color: var(--page-off-white);
+  border: 1px solid var(--page-turquoise);
 }
 
 .projects {
