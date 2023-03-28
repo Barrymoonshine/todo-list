@@ -121,7 +121,8 @@ const AppController = (() => {
   };
 
   const togglePriority = (e) => {
-    const targetTask = DataHolder.myTasks[getIndexPosition(e)];
+    const targetTask = DataHolder.getTasks()[getIndexPosition(e)];
+    console.log(`target task: ${targetTask}`);
     if (targetTask.priority === 'Low') {
       targetTask.priority = 'Medium';
     } else if (targetTask.priority === 'Medium') {
