@@ -11,6 +11,10 @@ const DataHolder = (() => {
     myTasks.splice(index, 1);
   };
 
+  const editTask = (editTaskIndexPosition, newTask) => {
+    myTasks.splice(editTaskIndexPosition, 1, newTask);
+  };
+
   const myProjects = ['My Tasks'];
 
   const addNewProject = (newProject) => {
@@ -24,9 +28,9 @@ const DataHolder = (() => {
     addNewTask,
     getTasks,
     deleteTask,
+    editTask,
     addNewProject,
     getProjects,
-    myProjects,
     date,
   };
 })();

@@ -110,7 +110,7 @@ const AppController = (() => {
     if (editModeActive === false) {
       DataHolder.addNewTask(newTask);
     } else if (editModeActive === true) {
-      DataHolder.myTasks.splice(editTaskIndexPosition, 1, newTask);
+      DataHolder.editTask(editTaskIndexPosition, newTask);
       editModeActive = false;
       editTaskIndexPosition = '';
     }
