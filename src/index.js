@@ -1,4 +1,5 @@
 import './styles/global-style.css';
+import './styles/normalize.css';
 import appController from './modules/appController.js';
 import displayController from './modules/displayController.js';
 import formValueProvider from './modules/formValueProvider.js';
