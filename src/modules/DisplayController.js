@@ -1,5 +1,4 @@
 import { addMonths, isBefore, parseISO, addYears } from 'date-fns';
-import FormValueProvider from './FormValueProvider.js';
 import DataHolder from './DataHolder.js';
 
 const DisplayController = (() => {
@@ -131,7 +130,7 @@ const DisplayController = (() => {
 
   const identifyProjectTasks = (targetProjectName) => {
     // Identifies the target projects tasks
-    DataHolder.myTasks.forEach((item, index) => {
+    DataHolder.getTasks().forEach((item, index) => {
       if (item.project === targetProjectName) {
         displayTask(item, index);
       }
@@ -139,13 +138,13 @@ const DisplayController = (() => {
   };
 
   const displayAllTasks = () => {
-    DataHolder.myTasks.forEach((item, index) => {
+    DataHolder.getTasks().forEach((item, index) => {
       displayTask(item, index);
     });
   };
 
   const identifyHighPriorityTasks = () => {
-    DataHolder.myTasks.forEach((item, index) => {
+    DataHolder.getTasks().forEach((item, index) => {
       if (item.priority === 'High') {
         displayTask(item, index);
       }
@@ -159,7 +158,7 @@ const DisplayController = (() => {
 
   const identifyTasksDueToday = () => {
     const currentDate = getCurrentDate();
-    DataHolder.myTasks.forEach((item, index) => {
+    DataHolder.getTasks().forEach((item, index) => {
       if (item.dueDate === currentDate) {
         displayTask(item, index);
       }
@@ -169,7 +168,7 @@ const DisplayController = (() => {
   const identifyTasksDueThisMonth = () => {
     const currentDate = getCurrentDate();
     const nextMonth = addMonths(parseISO(currentDate), 1);
-    DataHolder.myTasks.forEach((item, index) => {
+    DataHolder.getTasks().forEach((item, index) => {
       if (isBefore(parseISO(item.dueDate), nextMonth) === true) {
         displayTask(item, index);
       }
@@ -179,7 +178,7 @@ const DisplayController = (() => {
   const identifyTasksDueThisYear = () => {
     const currentDate = getCurrentDate();
     const nextYear = addYears(parseISO(currentDate), 1);
-    DataHolder.myTasks.forEach((item, index) => {
+    DataHolder.getTasks().forEach((item, index) => {
       if (isBefore(parseISO(item.dueDate), nextYear) === true) {
         displayTask(item, index);
       }
