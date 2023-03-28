@@ -1,6 +1,7 @@
 import DisplayController from './DisplayController.js';
 import FormValueProvider from './FormValueProvider.js';
 import DataHolder from './DataHolder.js';
+import LocalStorageController from './modules/LocalStorageController.js';
 
 const AppController = (() => {
   const submitNewProjectForm = document.getElementById('new-project-form');
@@ -26,67 +27,6 @@ const AppController = (() => {
     dueDate,
     open,
   });
-
-  const addStoredTasks = (storedTasks) => {
-    storedTasks.forEach((item) => {
-      const newTask = TasksFactory(
-        item.project,
-        item.title,
-        item.description,
-        item.priority,
-        item.dueDate,
-        item.open
-      );
-      DataHolder.addNewTask(newTask);
-    });
-  };
-
-  const addStoredProjects = (storedProjects) => {
-    // Adds all the stored projects other than the default project to avoid duplication
-    storedProjects.forEach((item) => {
-      if (item !== 'My Tasks') {
-        DataHolder.addNewProject(item);
-      }
-    });
-  };
-
-  const handleLocalStorage = (storedTasks, storedProjects) => {
-    if (storedTasks === null && storedProjects !== null) {
-      addStoredProjects(storedProjects);
-    } else if (storedTasks !== null && storedProjects === null) {
-      addStoredTasks(storedTasks);
-    } else {
-      addStoredProjects(storedProjects);
-      addStoredTasks(storedTasks);
-    }
-  };
-
-  const checkForLocalStorage = () => {
-    const storedTasks = JSON.parse(localStorage.getItem('myTasks'));
-    const storedProjects = JSON.parse(localStorage.getItem('myProjects'));
-    if (storedTasks === null && storedProjects === null) {
-      // No local storage present, do nothing
-    } else {
-      handleLocalStorage(storedTasks, storedProjects);
-      DisplayController.displayPageOnLoad();
-    }
-  };
-
-  const saveProjectsToLocalStorage = () => {
-    localStorage.setItem(
-      'myProjects',
-      JSON.stringify(DataHolder.getProjects())
-    );
-  };
-
-  const clearTasksFromLocalStorage = () => {
-    localStorage.removeItem('myTasks');
-  };
-
-  const refreshTasksLocalStorage = () => {
-    clearTasksFromLocalStorage();
-    localStorage.setItem('myTasks', JSON.stringify(DataHolder.getTasks()));
-  };
 
   const createTask = () => {
     const project = FormValueProvider.getTaskFormValues().projectValue;
@@ -127,7 +67,7 @@ const AppController = (() => {
       DisplayController.displaySameProjectNameWarning();
     } else {
       addProject(newProject);
-      saveProjectsToLocalStorage();
+      LocalStorageController.saveProjectsToLocalStorage();
       DisplayController.displayProjects();
       DisplayController.hideModals();
       DisplayController.clearForms();
@@ -138,7 +78,7 @@ const AppController = (() => {
     e.preventDefault();
     const newTask = createTask();
     applyTaskMode(newTask);
-    refreshTasksLocalStorage();
+    LocalStorageController.refreshTasksLocalStorage();
     DisplayController.displayProjectName(DisplayController.getCurrentProject());
     DisplayController.handleTasksDisplay(DisplayController.getCurrentProject());
     DisplayController.hideModals();
@@ -166,7 +106,7 @@ const AppController = (() => {
   const deleteTask = (e) => {
     DataHolder.deleteTask(getIndexPosition(e));
     DisplayController.handleTasksDisplay(DisplayController.getCurrentProject());
-    refreshTasksLocalStorage();
+    LocalStorageController.refreshTasksLocalStorage();
   };
 
   const editTask = (e) => {
@@ -190,7 +130,7 @@ const AppController = (() => {
       targetTask.priority = 'Low';
     }
     DisplayController.handleTasksDisplay(DisplayController.getCurrentProject());
-    refreshTasksLocalStorage();
+    LocalStorageController.refreshTasksLocalStorage();
   };
 
   const completeTask = (e) => {
@@ -221,8 +161,6 @@ const AppController = (() => {
       completeTask(e);
     }
   });
-
-  return { checkForLocalStorage };
 })();
 
 export default AppController;
