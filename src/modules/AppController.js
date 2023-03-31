@@ -2,6 +2,7 @@ import DisplayController from './DisplayController.js';
 import FormValueProvider from './FormValueProvider.js';
 import DataHolder from './DataHolder.js';
 import LocalStorageController from './LocalStorageController.js';
+import TasksProvider from './TasksProvider.js';
 
 const AppController = (() => {
   const submitNewProjectForm = document.getElementById('new-project-form');
@@ -12,22 +13,6 @@ const AppController = (() => {
   let editModeActive = false;
   let editTaskIndexPosition = '';
 
-  const TasksFactory = (
-    project,
-    title,
-    description,
-    priority,
-    dueDate,
-    open
-  ) => ({
-    project,
-    title,
-    description,
-    priority,
-    dueDate,
-    open,
-  });
-
   const createTask = () => {
     const project = FormValueProvider.getTaskFormValues().projectValue;
     const title = FormValueProvider.getTaskFormValues().titleValue;
@@ -35,7 +20,7 @@ const AppController = (() => {
     const priority = FormValueProvider.getTaskFormValues().priorityValue;
     const dueDate = FormValueProvider.getTaskFormValues().dueDateValue;
     const open = false;
-    const newTask = TasksFactory(
+    const newTask = TasksProvider.TasksFactory(
       project,
       title,
       description,
@@ -43,6 +28,7 @@ const AppController = (() => {
       dueDate,
       open
     );
+    console.log(`new task: ${newTask}`);
     return newTask;
   };
 
@@ -75,6 +61,7 @@ const AppController = (() => {
   };
 
   const handleTaskForm = (e) => {
+    console.log('handle task form invoked');
     e.preventDefault();
     const newTask = createTask();
     applyTaskMode(newTask);
@@ -122,7 +109,6 @@ const AppController = (() => {
 
   const togglePriority = (e) => {
     const targetTask = DataHolder.getTasks()[getIndexPosition(e)];
-    console.log(`target task: ${targetTask}`);
     if (targetTask.priority === 'Low') {
       targetTask.priority = 'Medium';
     } else if (targetTask.priority === 'Medium') {
@@ -146,6 +132,7 @@ const AppController = (() => {
 
   submitNewTaskForm.addEventListener('submit', (e) => {
     handleTaskForm(e);
+    console.log('new task form submitted');
   });
 
   dynamicTasksContainer.addEventListener('click', (e) => {
@@ -162,7 +149,6 @@ const AppController = (() => {
       completeTask(e);
     }
   });
-  return { TasksFactory };
 })();
 
 export default AppController;

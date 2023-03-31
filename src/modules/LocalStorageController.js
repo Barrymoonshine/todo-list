@@ -1,11 +1,11 @@
 import DisplayController from './DisplayController.js';
 import DataHolder from './DataHolder.js';
-import AppController from './AppController.js';
+import TasksProvider from './TasksProvider.js';
 
 const LocalStorageController = (() => {
   const addStoredTasks = (storedTasks) => {
     storedTasks.forEach((item) => {
-      const newTask = AppController.TasksFactory(
+      const newTask = TasksProvider.TasksFactory(
         item.project,
         item.title,
         item.description,
